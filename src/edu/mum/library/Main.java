@@ -1,4 +1,4 @@
-package application;
+package edu.mum.library;
 	
 import javafx.application.Application;
 import javafx.stage.Stage;

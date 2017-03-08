@@ -1,5 +1,6 @@
 package edu.mum.library;
 
+import edu.mum.library.ui.util.ResourceProvider;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -12,10 +13,8 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 		try {
 
-			Parent root = FXMLLoader.load(getClass().getResource("/edu/mum/library/ui/Login.fxml"));
-			// BorderPane root = new BorderPane();
+			Parent root = FXMLLoader.load(ResourceProvider.getLogin());
 			Scene scene = new Scene(root);
-			// scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
 			primaryStage.show();
 		} catch(Exception e) {

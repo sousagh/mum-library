@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.mum.library.ui.controller.BookController">
+   <children>
+      <Text layoutX="83.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Book" />
+      <TextField fx:id="bookName" editable="false" layoutX="139.0" layoutY="52.0" />
+      <Text layoutX="85.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" text="info" />
+      <TextField fx:id="bookInfo" editable="false" layoutX="139.0" layoutY="85.0" />
+      <Label layoutX="139.0" layoutY="132.0" text="Label" />
+   </children>
+</AnchorPane>

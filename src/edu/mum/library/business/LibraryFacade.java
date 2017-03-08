@@ -6,16 +6,25 @@ import java.util.List;
 public class LibraryFacade implements IActorsLogic,ICheckoutLogic {
 
 	private List<LibraryMember> members;
-	private List<CheckoutItem> items;
+	private List<Book> books;
+	private List<Periodical> periodicals;
 	private List<User> users;
 	private CheckoutRecord record;
 	
-	public List<CheckoutItem> getItems() {
-		return items;
+	public List<Periodical> getPeriodicals() {
+		return periodicals;
 	}
 
-	public void setItems(List<CheckoutItem> items) {
-		this.items = items;
+	public void setPeriodicals(List<Periodical> periodicals) {
+		this.periodicals = periodicals;
+	}
+	
+	public List<Book> getBooks() {
+		return books;
+	}
+
+	public void setItems(List<Book> books) {
+		this.books = books;
 	}
 	
 	

@@ -11,5 +11,4 @@ public abstract class CheckoutItem {
 		this.available = available;
 	}
 	
-	
 }

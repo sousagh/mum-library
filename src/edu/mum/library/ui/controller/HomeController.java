@@ -107,7 +107,7 @@ public class HomeController {
 							root = FXMLLoader.load(ResourceProvider.getPeriodic());
 						}
 						Stage stage = new Stage();
-						stage.setTitle("Book");
+						stage.setTitle("Details");
 						stage.setScene(new Scene(root));
 						stage.show();
 

@@ -6,7 +6,7 @@ import java.util.Map;
 import edu.mum.library.business.bo.BookBO;
 import edu.mum.library.business.bo.LoginBO;
 import edu.mum.library.business.bo.MemberBO;
-import edu.mum.library.business.bo.PeriodicBO;
+import edu.mum.library.business.bo.PublicationBO;
 
 public final class BusinessObjectFactory {
 
@@ -16,7 +16,7 @@ public final class BusinessObjectFactory {
 		businessObjects.put(LoginBO.class, new LoginBOImpl());
 		businessObjects.put(MemberBO.class, new MemberBOImpl());
 		businessObjects.put(BookBO.class, new BookBOImpl());
-		businessObjects.put(PeriodicBO.class, new PeriodicBOImpl());
+		businessObjects.put(PublicationBO.class, new PublicationBOImpl());
 	}
 
 	public static Object getBusinessObject(Class<?> class1) {

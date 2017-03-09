@@ -1,17 +1,17 @@
 package edu.mum.library.business;
 
 public abstract class Person {
-	private String name;
+	private String firstName;
 	private String lastName;
 	private Address address;
 	private String phoneNumber;
 	
 	
-	public String getName() {
-		return name;
+	public String getFirstName() {
+		return firstName;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setFirstName(String name) {
+		this.firstName = name;
 	}
 	public String getLastName() {
 		return lastName;
@@ -34,7 +34,7 @@ public abstract class Person {
 	
 	public String toString(){
 		StringBuilder sb=new StringBuilder();
-		sb.append(name+" "+lastName);
+		sb.append(firstName+" "+lastName);
 		return sb.toString();
 	}
 	

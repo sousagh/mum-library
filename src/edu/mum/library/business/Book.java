@@ -5,9 +5,6 @@ import java.util.List;
 
 public class Book extends Publication{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -6829734135257045285L;
 
 	private String isbn;
@@ -16,7 +13,7 @@ public class Book extends Publication{
 	private List<Author> authors;
 	
 	public String getIsbn() {
-		return isbn;
+		return this.isbn;
 	}
 
 	public void setIsbn(String isbn) {
@@ -24,7 +21,7 @@ public class Book extends Publication{
 	}
 
 	public int getTotalCopies() {
-		return totalCopies;
+		return this.totalCopies;
 	}
 
 	public void setTotalCopies(int totalCopies) {
@@ -32,7 +29,7 @@ public class Book extends Publication{
 	}
 
 	public int getAvailableCopies() {
-		return availableCopies;
+		return this.availableCopies;
 	}
 
 	public void setAvailableCopies(int availableCopies) {
@@ -40,7 +37,7 @@ public class Book extends Publication{
 	}
 
 	public List<Author> getAuthors() {
-		return authors;
+		return this.authors;
 	}
 
 	public void setAuthors(List<Author> authors) {
@@ -52,7 +49,7 @@ public class Book extends Publication{
 		this.isbn=isbn;
 		this.authors=new ArrayList<Author>();
 		this.authors.add(author);
-		totalCopies=availableCopies=1;
+		this.totalCopies=this.availableCopies=1;
 	}
 	
 	public void addAuthor(Author author){
@@ -73,13 +70,16 @@ public class Book extends Publication{
 	public boolean isAvailable(){
 		if(this.availableCopies>0){
 			return true;
-		}else return false;
+		} else {
+			return false;
+		}
 	}
 	
+	@Override
 	public String toString(){
 		StringBuilder sb=new StringBuilder();
-		sb.append(super.title+", "+isbn+"\n");
-		for(Author author:authors){
+		sb.append(super.title+", "+this.isbn+"\n");
+		for(Author author:this.authors){
 			sb.append(author.toString()+"\n");
 		}
 		return sb.toString();

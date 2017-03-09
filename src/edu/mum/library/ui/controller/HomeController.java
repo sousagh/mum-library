@@ -7,7 +7,7 @@ import edu.mum.library.business.Address;
 import edu.mum.library.business.LibraryMember;
 import edu.mum.library.business.bo.BookBO;
 import edu.mum.library.business.bo.MemberBO;
-import edu.mum.library.business.bo.PeriodicBO;
+import edu.mum.library.business.bo.PublicationBO;
 import edu.mum.library.business.bo.impl.BusinessObjectFactory;
 import edu.mum.library.ui.util.AppContext;
 import edu.mum.library.ui.util.ResourceProvider;
@@ -128,7 +128,7 @@ public class HomeController {
 					this.authorSearch.getText());
 
 		} else {
-			PeriodicBO periodicBO = (PeriodicBO) BusinessObjectFactory.getBusinessObject(PeriodicBO.class);
+			PublicationBO periodicBO = (PublicationBO) BusinessObjectFactory.getBusinessObject(PublicationBO.class);
 			books = periodicBO.search(this.nameSearch.getText(), this.dateSearch.getValue());
 		}
 		this.data = FXCollections.observableArrayList(books);
@@ -210,7 +210,7 @@ public class HomeController {
 			alert.showAndWait();
 		} else {
 			LibraryMember member = new LibraryMember();
-			member.setName(this.firstNameMember.getText());
+			member.setFirstName(this.firstNameMember.getText());
 			member.setLastName(this.lastNameMember.getText());
 			member.setMemberNumber(new Integer(this.idMember.getText()));
 			member.setPhoneNumber(this.phoneNumberMember.getText());

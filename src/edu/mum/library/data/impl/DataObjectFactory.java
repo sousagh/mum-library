@@ -12,10 +12,10 @@ public final class DataObjectFactory {
 
 	static {
 		dataObjects.put(MemberDataAccess.class, new MemberDataAccessImpl());
-		
+
 	}
 
-	public static Object getBusinessObject(Class<?> class1) {
+	public static Object getDataObject(Class<?> class1) {
 
 		return dataObjects.get(class1);
 	}

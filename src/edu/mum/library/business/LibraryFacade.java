@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import edu.mum.library.data.MemberDataAccess;
-import edu.mum.library.data.MemberDataAccessFacade;
+import edu.mum.library.data.impl.MemberDataAccessImpl;
 
 public class LibraryFacade implements IActorsLogic,ICheckoutLogic {
 
@@ -81,7 +81,7 @@ public class LibraryFacade implements IActorsLogic,ICheckoutLogic {
 
 	@Override
 	public void addNewMember(LibraryMember member) {
-		MemberDataAccess da=new MemberDataAccessFacade();
+		MemberDataAccess da=new MemberDataAccessImpl();
 		da.saveLibraryMember(member.getMemberNumber(), member);		
 	}
 

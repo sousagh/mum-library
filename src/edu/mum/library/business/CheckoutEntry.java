@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-import edu.mum.library.data.MemberDataAccessFacade;
+import edu.mum.library.data.impl.MemberDataAccessImpl;
 
 public class CheckoutEntry implements Serializable{
 	/**
@@ -43,8 +43,8 @@ public class CheckoutEntry implements Serializable{
 	public String toString(){
 		StringBuilder sb=new StringBuilder();
 		sb.append("[" + "checkoutdate:" );
-		sb.append(checkoutDate.format(DateTimeFormatter.ofPattern(MemberDataAccessFacade.DATE_PATTERN)));
-		sb.append(", dueDate: " + dueDate.format(DateTimeFormatter.ofPattern(MemberDataAccessFacade.DATE_PATTERN)));
+		sb.append(checkoutDate.format(DateTimeFormatter.ofPattern(MemberDataAccessImpl.DATE_PATTERN)));
+		sb.append(", dueDate: " + dueDate.format(DateTimeFormatter.ofPattern(MemberDataAccessImpl.DATE_PATTERN)));
 		sb.append(", publication: " + item + "]");
 		return sb.toString();
 	}

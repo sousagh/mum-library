@@ -1,4 +1,4 @@
-package edu.mum.library.data;
+package edu.mum.library.data.impl;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -7,11 +7,15 @@ import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import edu.mum.library.business.LibraryMember;
+import edu.mum.library.data.MemberDataAccess;
 
-public class MemberDataAccessFacade implements MemberDataAccess {
+public class MemberDataAccessImpl implements MemberDataAccess {
 	public static final String OUTPUT_DIR = System.getProperty("user.dir") 
 			+ "\\src\\edu\\mum\\library\\data\\storage\\members";
 	public static final String DATE_PATTERN = "MM/dd/yyyy";
+	
+	
+	MemberDataAccessImpl(){}
 	
 	@Override
 	public void saveLibraryMember(int memberNumber, LibraryMember member) {

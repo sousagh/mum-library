@@ -3,8 +3,8 @@ package edu.mum.library.business;
 import java.util.HashMap;
 import java.util.List;
 
-import edu.mum.library.data.DataAccess;
-import edu.mum.library.data.DataAccessFacade;
+import edu.mum.library.data.MemberDataAccess;
+import edu.mum.library.data.MemberDataAccessFacade;
 
 public class LibraryFacade implements IActorsLogic,ICheckoutLogic {
 
@@ -81,7 +81,7 @@ public class LibraryFacade implements IActorsLogic,ICheckoutLogic {
 
 	@Override
 	public void addNewMember(LibraryMember member) {
-		DataAccess da=new DataAccessFacade();
+		MemberDataAccess da=new MemberDataAccessFacade();
 		da.saveLibraryMember(member.getMemberNumber(), member);		
 	}
 

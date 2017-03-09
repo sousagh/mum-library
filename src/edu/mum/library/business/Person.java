@@ -1,10 +1,10 @@
 package edu.mum.library.business;
 
 public abstract class Person {
-	private String name;
-	private String lastName;
-	private Address address;
-	private String phoneNumber;
+	protected String name;
+	protected String lastName;
+	protected Address address;
+	protected String phoneNumber;
 	
 	
 	public String getName() {

@@ -10,6 +10,11 @@ public class CheckoutItem implements Serializable{
 	private Publication publication;
 	private int copyId;
 	
+	public CheckoutItem(Publication pub,int copyId){
+		this.publication=pub;
+		this.copyId=copyId;
+	}
+	
 	public int getCopyId() {
 		return copyId;
 	}

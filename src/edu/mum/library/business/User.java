@@ -3,7 +3,7 @@ package edu.mum.library.business;
 public class User {
     private Role role;
 	private String username;
-	private String password;
+	private transient String password;
 
 	public Role getRole() {
 		return role;

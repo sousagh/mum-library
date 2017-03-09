@@ -12,6 +12,6 @@ public class LibraryMember extends Person{
 	}
 	
 	public String toString(){
-		return "N° "+memberNumber+"\n"+super.toString();
+		return memberNumber+", "+super.toString();
 	}
 }

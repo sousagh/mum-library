@@ -34,9 +34,7 @@ public abstract class Person {
 	
 	public String toString(){
 		StringBuilder sb=new StringBuilder();
-		sb.append(name+lastName +"\n");
-		sb.append(address +"\n");
-		sb.append(phoneNumber +"\n");
+		sb.append(name+" "+lastName);
 		return sb.toString();
 	}
 	

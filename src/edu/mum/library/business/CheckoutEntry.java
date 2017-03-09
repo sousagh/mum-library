@@ -1,8 +1,16 @@
 package edu.mum.library.business;
 
+import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
-public class CheckoutEntry {
+import edu.mum.library.data.DataAccessFacade;
+
+public class CheckoutEntry implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8270653102635166719L;
 	private LibraryMember member;
 	private CheckoutItem item;
 	private LocalDate checkoutDate;
@@ -42,10 +50,11 @@ public class CheckoutEntry {
 	
 	public String toString(){
 		StringBuilder sb=new StringBuilder();
-		sb.append(this.item.toString()+" - ");
-		sb.append(this.member.getMemberNumber()+", "+ this.member.getName()+" "+this.member.getLastName()+" - ");
-		sb.append(this.checkoutDate.toString() +" - ");
-		sb.append(this.dueDate.toString()+"\n");
+		sb.append("[" + "checkoutdate:" );
+		sb.append(checkoutDate.format(DateTimeFormatter.ofPattern(DataAccessFacade.DATE_PATTERN)));
+		sb.append(", dueDate: " + dueDate.format(DateTimeFormatter.ofPattern(DataAccessFacade.DATE_PATTERN)));
+		sb.append(", publication: " + item );
+		sb.append(", member: " + member + "]");
 		return sb.toString();
 	}
 	

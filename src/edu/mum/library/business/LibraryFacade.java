@@ -3,29 +3,15 @@ package edu.mum.library.business;
 import java.util.HashMap;
 import java.util.List;
 
+import edu.mum.library.data.DataAccess;
+import edu.mum.library.data.DataAccessFacade;
+
 public class LibraryFacade implements IActorsLogic,ICheckoutLogic {
 
 	private List<LibraryMember> members;
-	private List<Book> books;
-	private List<Periodical> periodicals;
+	private List<Publication> publications;
 	private List<User> users;
 	private CheckoutRecord record;
-	
-	public List<Periodical> getPeriodicals() {
-		return periodicals;
-	}
-
-	public void setPeriodicals(List<Periodical> periodicals) {
-		this.periodicals = periodicals;
-	}
-	
-	public List<Book> getBooks() {
-		return books;
-	}
-
-	public void setItems(List<Book> books) {
-		this.books = books;
-	}
 	
 	
 	public List<LibraryMember> getMembers() {
@@ -60,7 +46,6 @@ public class LibraryFacade implements IActorsLogic,ICheckoutLogic {
 
 	@Override
 	public void addNewCopy(String isbn) {
-		// TODO Auto-generated method stub
 		
 	}
 
@@ -96,8 +81,16 @@ public class LibraryFacade implements IActorsLogic,ICheckoutLogic {
 
 	@Override
 	public void addNewMember(LibraryMember member) {
-		// TODO Auto-generated method stub
-		
+		DataAccess da=new DataAccessFacade();
+		da.saveLibraryMember(member.getMemberNumber(), member);		
+	}
+
+	public List<Publication> getPublications() {
+		return publications;
+	}
+
+	public void setPublications(List<Publication> publications) {
+		this.publications = publications;
 	}
 	
 }

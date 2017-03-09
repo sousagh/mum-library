@@ -9,6 +9,7 @@ public class Book extends Publication{
 	 * 
 	 */
 	private static final long serialVersionUID = -6829734135257045285L;
+
 	private String isbn;
 	private int totalCopies;
 	private int availableCopies;

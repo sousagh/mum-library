@@ -6,7 +6,7 @@ public abstract class Person {
 	protected Address address;
 	protected String phoneNumber;
 	
-	
+
 	public String getName() {
 		return name;
 	}

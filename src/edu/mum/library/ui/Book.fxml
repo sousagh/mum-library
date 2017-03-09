@@ -16,14 +16,14 @@
       </Text>
       <Text layoutX="55.0" layoutY="131.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name:" />
       <Text layoutX="48.0" layoutY="196.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Authors:" />
-      <Text layoutX="61.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID:" />
+      <Text layoutX="18.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Available Copies:" />
       <Text layoutX="61.0" layoutY="163.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ISBN:" />
-      <Button layoutX="56.0" layoutY="286.0" mnemonicParsing="false" text="Checkout" />
+      <Button fx:id="checkoutButton" layoutX="56.0" layoutY="286.0" mnemonicParsing="false" text="Checkout" />
       <TextField layoutX="165.0" layoutY="286.0" />
       <Button layoutX="440.0" layoutY="286.0" mnemonicParsing="false" text="Add Copy" />
-      <Label layoutX="133.0" layoutY="88.0" text="-" />
-      <Label layoutX="133.0" layoutY="118.0" text="-" />
-      <Label layoutX="133.0" layoutY="150.0" text="-" />
-      <Label layoutX="133.0" layoutY="183.0" text="-" />
+      <Label fx:id="availableCopies" layoutX="133.0" layoutY="88.0" text="-" />
+      <Label fx:id="nameBook" layoutX="133.0" layoutY="118.0" text="-" />
+      <Label fx:id="isbnBook" layoutX="133.0" layoutY="150.0" text="-" />
+      <Label fx:id="authorBook" layoutX="133.0" layoutY="183.0" text="-" />
    </children>
 </AnchorPane>

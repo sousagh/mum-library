@@ -9,12 +9,13 @@ public final class AppContext {
 	}
 
 	private final static Map<String, Object> context = new HashMap<>();
+	public static final String PUBLICATION = "PUBLICATION";
 
 	public static Object getParam(String name) {
 		return context.get(name);
 	}
 
 	public static void putParam(String name, Object value) {
-context.put(name, value);
+		context.put(name, value);
 	}
 }

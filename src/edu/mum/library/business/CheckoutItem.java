@@ -9,11 +9,24 @@ public class CheckoutItem implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private Publication publication;
 	private int copyId;
+	private boolean isAvailable;
 	
+	public boolean isAvailable() {
+		return isAvailable;
+	}
+
+	public void setAvailable(boolean isAvailable) {
+		this.isAvailable = isAvailable;
+	}
+
+
 	public CheckoutItem(Publication pub,int copyId){
 		this.publication=pub;
 		this.copyId=copyId;
+		this.isAvailable=true;
 	}
+	
+	
 	
 	public int getCopyId() {
 		return copyId;

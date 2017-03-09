@@ -35,7 +35,7 @@
                         <AnchorPane fx:id="periodicSearchPanel" layoutX="22.0" layoutY="51.0" prefHeight="66.0" prefWidth="555.0" visible="false">
                            <children>
                               <Text layoutX="43.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date" />
-                              <DatePicker layoutX="97.0" layoutY="23.0" prefHeight="27.0" prefWidth="165.0" />
+                              <DatePicker fx:id="dateSearch" layoutX="97.0" layoutY="23.0" prefHeight="27.0" prefWidth="165.0" />
                            </children>
                         </AnchorPane>
                         <Button layoutX="62.0" layoutY="117.0" mnemonicParsing="false" onAction="#search" text="Search" />

@@ -15,7 +15,7 @@ public class SearchTableEntry {
 	}
 
 	public String getItemName() {
-		return this.itemName.getValueSafe() + "!";
+		return this.itemName.getValueSafe();
 	}
 
 	public void setItemName(String itemName) {
@@ -30,7 +30,7 @@ public class SearchTableEntry {
 	}
 
 	public String getId() {
-		return id;
+		return this.id;
 	}
 
 	public void setId(String id) {

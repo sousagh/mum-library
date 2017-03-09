@@ -7,6 +7,7 @@ import edu.mum.library.business.Address;
 import edu.mum.library.business.LibraryMember;
 import edu.mum.library.business.bo.BookBO;
 import edu.mum.library.business.bo.MemberBO;
+import edu.mum.library.business.bo.PublicationBO;
 import edu.mum.library.business.bo.impl.BusinessObjectFactory;
 import edu.mum.library.ui.util.AppContext;
 import edu.mum.library.ui.util.ResourceProvider;
@@ -21,6 +22,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
@@ -96,6 +98,9 @@ public class HomeController {
 	private TextField authorSearch;
 
 	@FXML
+	private DatePicker dateSearch;
+
+	@FXML
 	public void initialize() {
 
 		configureRadioButton();
@@ -115,15 +120,19 @@ public class HomeController {
 	@FXML
 	public void search() {
 		RadioButton radioButton = (RadioButton) this.group.getSelectedToggle();
+		List<SearchTableEntry> books = null;
 		if (radioButton.getText().equals(BOOK)) {
 
 			BookBO bookBO = (BookBO) BusinessObjectFactory.getBusinessObject(BookBO.class);
-			List<SearchTableEntry> books = bookBO.search(this.nameSearch.getText(), this.isbnSearch.getText(),
+			books = bookBO.search(this.nameSearch.getText(), this.isbnSearch.getText(),
 					this.authorSearch.getText());
 
-			this.data = FXCollections.observableArrayList(books);
-			this.searchTable.setItems(this.data);
+		} else {
+			PublicationBO periodicBO = (PublicationBO) BusinessObjectFactory.getBusinessObject(PublicationBO.class);
+			books = periodicBO.search(this.nameSearch.getText(), this.dateSearch.getValue());
 		}
+		this.data = FXCollections.observableArrayList(books);
+		this.searchTable.setItems(this.data);
 	}
 
 	private void configureTable() {
@@ -138,7 +147,7 @@ public class HomeController {
 			row.setOnMouseClicked(event -> {
 				if (event.getClickCount() == 2 && (!row.isEmpty())) {
 					SearchTableEntry rowData = row.getItem();
-					AppContext.putParam("book", rowData);
+					AppContext.putParam(AppContext.PUBLICATION, rowData);
 					try {
 
 						RadioButton radioButton = (RadioButton) this.group.getSelectedToggle();
@@ -200,18 +209,8 @@ public class HomeController {
 
 			alert.showAndWait();
 		} else {
-			LibraryMember member = new LibraryMember();
-			member.setName(this.firstNameMember.getText());
-			member.setLastName(this.lastNameMember.getText());
-			member.setMemberNumber(new Integer(this.idMember.getText()));
-			member.setPhoneNumber(this.phoneNumberMember.getText());
-			Address address = new Address();
-			address.setCity(this.cityMember.getText());
-			address.setState(this.stateMember.getText());
-			address.setStreet(this.streetMember.getText());
-			address.setZipCode(this.zipCodeMember.getText());
-			member.setAddress(address);
-
+			Address address = new Address(this.streetMember.getText(),this.cityMember.getText(),this.stateMember.getText(),this.zipCodeMember.getText());
+			LibraryMember member = new LibraryMember(new Integer(this.idMember.getText()),this.firstNameMember.getText(),this.lastNameMember.getText(),address,this.phoneNumberMember.getText());
 			MemberBO memberBO = (MemberBO) BusinessObjectFactory.getBusinessObject(MemberBO.class);
 			memberBO.addMember(member);
 

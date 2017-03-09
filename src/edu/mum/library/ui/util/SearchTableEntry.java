@@ -4,12 +4,15 @@ import javafx.beans.property.SimpleStringProperty;
 
 public class SearchTableEntry {
 
-	public SearchTableEntry(String name, String info) {
-		this.itemName = new SimpleStringProperty(name);
-		this.itemInfo = new SimpleStringProperty(info);
-	}
+	private String id;
 	private SimpleStringProperty itemName;
 	private SimpleStringProperty itemInfo;
+
+	public SearchTableEntry(String id, String name, String info) {
+		this.itemName = new SimpleStringProperty(name);
+		this.itemInfo = new SimpleStringProperty(info);
+		this.setId(id);
+	}
 
 	public String getItemName() {
 		return this.itemName.getValueSafe() + "!";
@@ -24,6 +27,14 @@ public class SearchTableEntry {
 	}
 	public void setItemInfo(String itemInfo) {
 		this.itemInfo.set(itemInfo);
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 
 }

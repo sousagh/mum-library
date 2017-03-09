@@ -1,9 +1,11 @@
 package edu.mum.library.ui.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import edu.mum.library.business.Address;
 import edu.mum.library.business.LibraryMember;
+import edu.mum.library.business.bo.BookBO;
 import edu.mum.library.business.bo.MemberBO;
 import edu.mum.library.business.bo.impl.BusinessObjectFactory;
 import edu.mum.library.ui.util.AppContext;
@@ -85,6 +87,15 @@ public class HomeController {
 	private TextField phoneNumberMember;
 
 	@FXML
+	private TextField nameSearch;
+
+	@FXML
+	private TextField isbnSearch;
+
+	@FXML
+	private TextField authorSearch;
+
+	@FXML
 	public void initialize() {
 
 		configureRadioButton();
@@ -101,16 +112,25 @@ public class HomeController {
 		});
 	}
 
+	@FXML
+	public void search() {
+		RadioButton radioButton = (RadioButton) this.group.getSelectedToggle();
+		if (radioButton.getText().equals(BOOK)) {
+
+			BookBO bookBO = (BookBO) BusinessObjectFactory.getBusinessObject(BookBO.class);
+			List<SearchTableEntry> books = bookBO.search(this.nameSearch.getText(), this.isbnSearch.getText(),
+					this.authorSearch.getText());
+
+			this.data = FXCollections.observableArrayList(books);
+			this.searchTable.setItems(this.data);
+		}
+	}
+
 	private void configureTable() {
 		this.itemNameCol.setCellValueFactory(new PropertyValueFactory<>("itemName"));
 		this.itemInfoCol.setCellValueFactory(new PropertyValueFactory<>("itemInfo"));
 
 		this.data = FXCollections.observableArrayList();
-
-		this.data.add(new SearchTableEntry("qwwnM", "INFO"));
-		this.data.add(new SearchTableEntry("nMwwqwq", "INFO"));
-		this.data.add(new SearchTableEntry("gustavo", "INFO"));
-
 		this.searchTable.setItems(this.data);
 
 		this.searchTable.setRowFactory(tv -> {

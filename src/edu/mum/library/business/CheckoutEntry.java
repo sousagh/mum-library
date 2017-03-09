@@ -4,31 +4,23 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-import edu.mum.library.data.DataAccessFacade;
+import edu.mum.library.data.MemberDataAccessFacade;
 
 public class CheckoutEntry implements Serializable{
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -8270653102635166719L;
-	private LibraryMember member;
 	private CheckoutItem item;
 	private LocalDate checkoutDate;
 	private LocalDate dueDate;
 	
-	public CheckoutEntry(LibraryMember member,CheckoutItem item, LocalDate dueDate){
-		this.member=member;
+	public CheckoutEntry(CheckoutItem item, LocalDate dueDate){
 		this.item=item;
 		this.checkoutDate=LocalDate.now();
 		this.dueDate=dueDate;
 	}
-	
-	public LibraryMember getMember() {
-		return member;
-	}
-	public void setMember(LibraryMember member) {
-		this.member = member;
-	}
+
 	public CheckoutItem getItem() {
 		return item;
 	}
@@ -51,10 +43,9 @@ public class CheckoutEntry implements Serializable{
 	public String toString(){
 		StringBuilder sb=new StringBuilder();
 		sb.append("[" + "checkoutdate:" );
-		sb.append(checkoutDate.format(DateTimeFormatter.ofPattern(DataAccessFacade.DATE_PATTERN)));
-		sb.append(", dueDate: " + dueDate.format(DateTimeFormatter.ofPattern(DataAccessFacade.DATE_PATTERN)));
-		sb.append(", publication: " + item );
-		sb.append(", member: " + member + "]");
+		sb.append(checkoutDate.format(DateTimeFormatter.ofPattern(MemberDataAccessFacade.DATE_PATTERN)));
+		sb.append(", dueDate: " + dueDate.format(DateTimeFormatter.ofPattern(MemberDataAccessFacade.DATE_PATTERN)));
+		sb.append(", publication: " + item + "]");
 		return sb.toString();
 	}
 	

@@ -11,8 +11,7 @@ public class Book extends Publication{
 	private static final long serialVersionUID = -6829734135257045285L;
 
 	private String isbn;
-	private int totalCopies;
-	private int availableCopies;
+	private List<CheckoutItem> copies;
 	private List<Author> authors;
 	
 	public String getIsbn() {
@@ -21,22 +20,6 @@ public class Book extends Publication{
 
 	public void setIsbn(String isbn) {
 		this.isbn = isbn;
-	}
-
-	public int getTotalCopies() {
-		return totalCopies;
-	}
-
-	public void setTotalCopies(int totalCopies) {
-		this.totalCopies = totalCopies;
-	}
-
-	public int getAvailableCopies() {
-		return availableCopies;
-	}
-
-	public void setAvailableCopies(int availableCopies) {
-		this.availableCopies = availableCopies;
 	}
 
 	public List<Author> getAuthors() {
@@ -52,7 +35,9 @@ public class Book extends Publication{
 		this.isbn=isbn;
 		this.authors=new ArrayList<Author>();
 		this.authors.add(author);
-		totalCopies=availableCopies=1;
+		this.copies=new  ArrayList<CheckoutItem>();
+		CheckoutItem item=new CheckoutItem(this,1);
+		this.copies.add(item);
 	}
 	
 	public void addAuthor(Author author){
@@ -60,20 +45,17 @@ public class Book extends Publication{
 	}
 	
 	public void addCopy(){
-		this.totalCopies++;
-		this.availableCopies++;
+		int copies=this.copies.size();
+		CheckoutItem item=new CheckoutItem(this,copies++);
+		this.copies.add(item);
 	}	
 	
 	public void checkout(){
-		if(this.availableCopies>0){
-			this.availableCopies--;
-		}
+	
 	}
 	
 	public boolean isAvailable(){
-		if(this.availableCopies>0){
-			return true;
-		}else return false;
+		return true;
 	}
 	
 	public String toString(){

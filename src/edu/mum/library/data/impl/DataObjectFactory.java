@@ -3,7 +3,7 @@ package edu.mum.library.data.impl;
 import java.util.HashMap;
 import java.util.Map;
 
-import edu.mum.library.data.MemberDataAccess;
+import edu.mum.library.data.DataAccessObject;
 
 
 
@@ -11,7 +11,7 @@ public final class DataObjectFactory {
 	private static Map<Class<?>, Object> dataObjects = new HashMap<>();
 
 	static {
-		dataObjects.put(MemberDataAccess.class, new MemberDataAccessImpl());
+		dataObjects.put(DataAccessObject.class, new DataAccessObjectImpl());
 
 	}
 

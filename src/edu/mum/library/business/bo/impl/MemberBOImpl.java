@@ -2,9 +2,9 @@ package edu.mum.library.business.bo.impl;
 
 import edu.mum.library.business.LibraryMember;
 import edu.mum.library.business.bo.MemberBO;
-import edu.mum.library.data.MemberDataAccess;
+import edu.mum.library.data.DataAccessObject;
+import edu.mum.library.data.impl.DataAccessObjectImpl;
 import edu.mum.library.data.impl.DataObjectFactory;
-import edu.mum.library.data.impl.MemberDataAccessImpl;
 
 public class MemberBOImpl implements MemberBO {
 
@@ -14,9 +14,12 @@ public class MemberBOImpl implements MemberBO {
 
 	@Override
 	public void addMember(LibraryMember member) {
-		// TODO Auto-generated method stub
-		MemberDataAccess mda = (MemberDataAccessImpl) DataObjectFactory.getDataObject(MemberDataAccess.class);
-		mda.saveLibraryMember(member.getMemberNumber(), member);
+		DataAccessObject mda = (DataAccessObjectImpl) DataObjectFactory.getDataObject(DataAccessObject.class);
+		String id = new Integer(member.getMemberNumber()).toString();
+		mda.save(id, member);
+
+		member = (LibraryMember) mda.read(id, LibraryMember.class);
+		System.out.println(member.toString());
 	}
 
 }

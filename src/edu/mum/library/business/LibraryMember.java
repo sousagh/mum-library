@@ -1,6 +1,9 @@
 package edu.mum.library.business;
 
-public class LibraryMember extends Person{
+import java.io.Serializable;
+
+public class LibraryMember extends Person implements Serializable {
+	private static final long serialVersionUID = -1457880329095768495L;
 	private int memberNumber;
 	private CheckoutRecord record;
 
@@ -12,24 +15,28 @@ public class LibraryMember extends Person{
 		this.phoneNumber=phoneNumber;
 		this.record=new CheckoutRecord();
 	}
-	
+
+	public LibraryMember() {
+	}
+
 	public CheckoutRecord getRecord() {
-		return record;
+		return this.record;
 	}
 
 	public void setRecord(CheckoutRecord record) {
 		this.record = record;
 	}
-	
+
 	public int getMemberNumber() {
-		return memberNumber;
+		return this.memberNumber;
 	}
-	
+
 	public void setMemberNumber(int memberNumber) {
 		this.memberNumber = memberNumber;
 	}
-	
+
+	@Override
 	public String toString(){
-		return memberNumber+", "+super.toString();
+		return this.memberNumber+", "+super.toString();
 	}
 }

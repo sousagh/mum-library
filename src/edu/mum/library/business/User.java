@@ -1,20 +1,30 @@
 package edu.mum.library.business;
 
 public class User {
-    private Role role;
+	private Role role;
 	private String username;
 	private transient String password;
 
+	public User(String user, String password, Role role) {
+		this.username = user;
+		this.password = password;
+		this.role = role;
+	}
+
+	public User() {
+
+	}
+
 	public Role getRole() {
-		return role;
+		return this.role;
 	}
 
 	public void setRole(Role role) {
 		this.role = role;
 	}
-	
+
 	public String getUsername() {
-		return username;
+		return this.username;
 	}
 
 	public void setUsername(String username) {
@@ -22,20 +32,15 @@ public class User {
 	}
 
 	public String getPassword() {
-		return password;
+		return this.password;
 	}
 
 	public void setPassword(String password) {
 		this.password = password;
 	}
 
+	@Override
 	public String toString(){
-		return username;
-	}
-	
-	public User(String user,String password,Role role){
-		this.username=user;
-		this.password=password;
-		this.role=role;
+		return this.username;
 	}
 }

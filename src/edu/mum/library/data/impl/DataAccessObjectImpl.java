@@ -35,8 +35,6 @@ public class DataAccessObjectImpl implements DataAccessObject {
 				file.createNewFile();
 			}
 
-			// out = new ObjectOutputStream(new FileOutputStream(file));
-			// out.writeObject(object);
 			mapper.writeValue(file, object);
 		} catch(IOException e) {
 			e.printStackTrace();
@@ -46,8 +44,12 @@ public class DataAccessObjectImpl implements DataAccessObject {
 	@Override
 	public Object read(String id, Class<?> clazz) {
 		Object member = null;
+		File file = new File(OUTPUT_DIR + clazz.getSimpleName() + File.separator + id + JSON);
+
+		if (!file.exists()) {
+			return null;
+		}
 		try {
-			File file = new File(OUTPUT_DIR + clazz.getSimpleName() + File.separator + id);
 
 			ObjectMapper mapper = new ObjectMapper();
 			member = mapper.readValue(file, clazz);

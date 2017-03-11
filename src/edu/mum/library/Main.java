@@ -1,5 +1,6 @@
 package edu.mum.library;
 
+import edu.mum.library.data.DBInit;
 import edu.mum.library.ui.util.ResourceProvider;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -23,6 +24,7 @@ public class Main extends Application {
 	}
 
 	public static void main(String[] args) {
+		DBInit.populate();
 		launch(args);
 	}
 }

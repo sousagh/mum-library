@@ -1,5 +1,6 @@
 package edu.mum.library.ui.util;
 
+import edu.mum.library.business.Book;
 import javafx.beans.property.SimpleStringProperty;
 
 public class SearchTableEntry {
@@ -12,6 +13,10 @@ public class SearchTableEntry {
 		this.itemName = new SimpleStringProperty(name);
 		this.itemInfo = new SimpleStringProperty(info);
 		this.setId(id);
+	}
+
+	public SearchTableEntry(Book book) {
+		this(book.getIsbn(), book.getTitle(), book.getAuthors().toString());
 	}
 
 	public String getItemName() {

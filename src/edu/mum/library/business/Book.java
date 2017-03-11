@@ -3,6 +3,8 @@ package edu.mum.library.business;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class Book extends Publication{
 
 	private static final long serialVersionUID = -6829734135257045285L;
@@ -11,9 +13,9 @@ public class Book extends Publication{
 	private List<CheckoutItem> copies;
 	private List<Author> authors;
 	private int maxDays;
-	
+
 	public int getMaxDays() {
-		return maxDays;
+		return this.maxDays;
 	}
 
 	public String getIsbn() {
@@ -42,40 +44,45 @@ public class Book extends Publication{
 		CheckoutItem item=new CheckoutItem(this,1);
 		this.copies.add(item);
 	}
-	
+
+	public Book() {
+	}
+
 	public void addAuthor(Author author){
 		this.authors.add(author);
 	}
-	
+
 	public void addCopy(){
 		int copies=this.copies.size();
 		CheckoutItem item=new CheckoutItem(this,copies++);
 		this.copies.add(item);
-	}	
-	
-	public void checkout(){
-	
 	}
-	
+
+	public void checkout(){
+
+	}
+
+	@JsonIgnore
 	public boolean isAvailable(){
-		for(CheckoutItem copy:copies){
+		for(CheckoutItem copy:this.copies){
 			if(copy.isAvailable()){
 				return true;
 			}
 		}
 		return false;
 	}
-	
+
+	@JsonIgnore
 	public int getAvailableCopies(){
 		int sum=0;
-		for(CheckoutItem copy:copies){
+		for(CheckoutItem copy:this.copies){
 			if(copy.isAvailable()){
 				sum++;
 			}
 		}
 		return sum;
 	}
-	
+
 	@Override
 	public String toString(){
 		StringBuilder sb=new StringBuilder();

@@ -9,6 +9,10 @@ public class Publication implements Serializable {
 	protected String title;
 	protected LocalDate date;
 
+	public Publication() {
+
+	}
+
 	public Publication(String title){
 		this.title=title;
 	}

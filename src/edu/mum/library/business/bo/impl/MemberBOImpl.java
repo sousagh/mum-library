@@ -9,7 +9,6 @@ import edu.mum.library.data.impl.DataObjectFactory;
 public class MemberBOImpl implements MemberBO {
 
 	MemberBOImpl() {
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
@@ -19,7 +18,6 @@ public class MemberBOImpl implements MemberBO {
 		mda.save(id, member);
 
 		member = (LibraryMember) mda.read(id, LibraryMember.class);
-		System.out.println(member.toString());
 	}
 
 }

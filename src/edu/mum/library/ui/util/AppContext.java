@@ -10,6 +10,7 @@ public final class AppContext {
 
 	private final static Map<String, Object> context = new HashMap<>();
 	public static final String PUBLICATION = "PUBLICATION";
+	public static final String USER = "USER";
 
 	public static Object getParam(String name) {
 		return context.get(name);

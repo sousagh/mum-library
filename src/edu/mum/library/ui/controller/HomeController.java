@@ -5,6 +5,8 @@ import java.util.List;
 
 import edu.mum.library.business.Address;
 import edu.mum.library.business.LibraryMember;
+import edu.mum.library.business.Role;
+import edu.mum.library.business.User;
 import edu.mum.library.business.bo.BookBO;
 import edu.mum.library.business.bo.MemberBO;
 import edu.mum.library.business.bo.PublicationBO;
@@ -24,6 +26,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
@@ -101,6 +104,9 @@ public class HomeController {
 	private DatePicker dateSearch;
 
 	@FXML
+	private Tab addMemberTab;
+
+	@FXML
 	public void initialize() {
 
 		configureRadioButton();
@@ -115,6 +121,14 @@ public class HomeController {
 				}
 			}
 		});
+
+		User user = (User) AppContext.getParam(AppContext.USER);
+		if (user.getRole().equals(Role.ADMINISTRATOR) || user.getRole().equals(Role.LIBRARIAN_ADMINISTRATOR)) {
+			this.addMemberTab.setDisable(false);
+		} else {
+			this.addMemberTab.setDisable(true);
+		}
+
 	}
 
 	@FXML

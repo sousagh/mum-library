@@ -113,6 +113,18 @@ public class HomeController {
 
 		configureTable();
 
+		configureTextFields();
+
+		User user = (User) AppContext.getParam(AppContext.USER);
+		if (user.getRole().equals(Role.ADMINISTRATOR) || user.getRole().equals(Role.LIBRARIAN_ADMINISTRATOR)) {
+			this.addMemberTab.setDisable(false);
+		} else {
+			this.addMemberTab.setDisable(true);
+		}
+
+	}
+
+	private void configureTextFields() {
 		this.idMember.textProperty().addListener(new ChangeListener<String>() {
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
@@ -122,13 +134,28 @@ public class HomeController {
 			}
 		});
 
-		User user = (User) AppContext.getParam(AppContext.USER);
-		if (user.getRole().equals(Role.ADMINISTRATOR) || user.getRole().equals(Role.LIBRARIAN_ADMINISTRATOR)) {
-			this.addMemberTab.setDisable(false);
-		} else {
-			this.addMemberTab.setDisable(true);
-		}
+		this.phoneNumberMember.textProperty().addListener(new ChangeListener<String>() {
+			@Override
+			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+				if (!newValue.matches("\\d*")) {
+					HomeController.this.phoneNumberMember.setText(newValue.replaceAll("[^\\d]", ""));
+				}
+			}
+		});
 
+		this.zipCodeMember.textProperty().addListener(new ChangeListener<String>() {
+			@Override
+			public void changed(final ObservableValue<? extends String> ov, final String oldValue,
+					final String newValue) {
+				if (!newValue.matches("\\d*")) {
+					HomeController.this.zipCodeMember.setText(newValue.replaceAll("[^\\d]", ""));
+				}
+				if (HomeController.this.zipCodeMember.getText().length() > 5) {
+					String s = HomeController.this.zipCodeMember.getText().substring(0, 5);
+					HomeController.this.zipCodeMember.setText(s);
+				}
+			}
+		});
 	}
 
 	@FXML
@@ -215,27 +242,66 @@ public class HomeController {
 
 	@FXML
 	public void addMember() {
-		if (this.lastNameMember.getText().isEmpty() || this.idMember.getText().isEmpty()) {
-			Alert alert = new Alert(AlertType.WARNING);
-			alert.setTitle("Warning Dialog");
-			alert.setHeaderText("Member's Id and Last Name cannot be empty");
-			alert.setContentText("Correct your data to proceed.");
 
-			alert.showAndWait();
-		} else {
+		if (validateAddMember()) {
+
 			Address address = new Address(this.streetMember.getText(),this.cityMember.getText(),this.stateMember.getText(),this.zipCodeMember.getText());
 			LibraryMember member = new LibraryMember(new Integer(this.idMember.getText()),this.firstNameMember.getText(),this.lastNameMember.getText(),address,this.phoneNumberMember.getText());
 			MemberBO memberBO = (MemberBO) BusinessObjectFactory.getBusinessObject(MemberBO.class);
-			memberBO.addMember(member);
 
-			Alert alert = new Alert(AlertType.INFORMATION);
-			alert.setTitle("Information Dialog");
-			alert.setHeaderText(null);
-			alert.setContentText("Success!");
-			alert.showAndWait();
+			if (!memberBO.exists(member.getMemberNumber())) {
+				memberBO.addMember(member);
 
-			this.clearMemberTab();
+				Alert alert = new Alert(AlertType.INFORMATION);
+				alert.setTitle("Information Dialog");
+				alert.setHeaderText(null);
+				alert.setContentText("Success!");
+				alert.showAndWait();
+
+				this.clearMemberTab();
+			} else {
+				Alert alert = new Alert(AlertType.WARNING);
+				alert.setTitle("Validation Error");
+				alert.setContentText("Member already exists.");
+				alert.showAndWait();
+			}
+
 		}
+	}
+
+	private boolean validateAddMember() {
+		StringBuilder builder = new StringBuilder();
+
+		if (this.idMember.getText().isEmpty()) {
+			builder.append("ID cannot be empty. \n");
+		}
+		if (this.firstNameMember.getText().isEmpty()) {
+			builder.append("First Name cannot be empty. \n");
+		}
+		if (this.lastNameMember.getText().isEmpty()) {
+			builder.append("Last Name cannot be empty. \n");
+		}
+		if (this.streetMember.getText().isEmpty()) {
+			builder.append("Street cannot be empty. \n");
+		}
+		if (this.cityMember.getText().isEmpty()) {
+			builder.append("City cannot be empty. \n");
+		}
+		if (this.stateMember.getText().isEmpty()) {
+			builder.append("State cannot be empty. \n");
+		}
+		if (this.phoneNumberMember.getText().isEmpty()) {
+			builder.append("Phone number cannot be empty. \n");
+		}
+
+		boolean valid = builder.toString().isEmpty();
+		if (!valid) {
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.setTitle("Validation Error");
+			alert.setContentText(builder.toString());
+			alert.showAndWait();
+		}
+		return valid;
 	}
 
 	private void clearMemberTab() {

@@ -6,4 +6,6 @@ public interface MemberBO {
 
 	void addMember(LibraryMember member);
 
+	boolean exists(int memberNumber);
+
 }

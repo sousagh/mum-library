@@ -233,12 +233,20 @@ public class HomeController {
 					} else {
 						HomeController.this.bookSearchPanel.setVisible(false);
 						HomeController.this.periodicSearchPanel.setVisible(true);
+						HomeController.this.findAllPeriodics();
 					}
 				}
 			}
 		});
 
 		this.bookRadioButton.setSelected(true);
+	}
+
+	protected void findAllPeriodics() {
+		PublicationBO publicationBO = (PublicationBO) BusinessObjectFactory.getBusinessObject(PublicationBO.class);
+		List<SearchTableEntry> publications = publicationBO.findAll();
+		this.data = FXCollections.observableArrayList(publications);
+		this.searchTable.setItems(this.data);
 	}
 
 	protected void findAllBooks() {

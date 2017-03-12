@@ -12,7 +12,6 @@ import java.util.Set;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import edu.mum.library.business.Book;
 import edu.mum.library.data.DataAccessObject;
 
 public class DataAccessObjectImpl implements DataAccessObject {
@@ -37,7 +36,6 @@ public class DataAccessObjectImpl implements DataAccessObject {
 			if (!file.exists()) {
 				file.createNewFile();
 			}
-			// mapper.writeValueAsString(object)
 			mapper.writerWithDefaultPrettyPrinter().writeValue(file, object);
 		} catch(IOException e) {
 			e.printStackTrace();
@@ -100,7 +98,7 @@ public class DataAccessObjectImpl implements DataAccessObject {
 	}
 
 	@Override
-	public List<Object> findAll(Class<Book> clazz) {
+	public List<Object> findAll(Class<?> clazz) {
 		List<Object> objects = new ArrayList<>();
 		File file = new File(OUTPUT_DIR + clazz.getSimpleName());
 		ObjectMapper mapper = new ObjectMapper();

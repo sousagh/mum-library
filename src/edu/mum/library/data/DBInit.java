@@ -1,6 +1,6 @@
 package edu.mum.library.data;
 
-import java.time.LocalDate;
+import java.util.Date;
 
 import edu.mum.library.business.Address;
 import edu.mum.library.business.Author;
@@ -30,7 +30,7 @@ public class DBInit {
 		Author a1=new Author("James","Tolkien",add1,"+59898830609","Wrote the Lord of the Rings saga","This guy is awsome");
 		dao.save(a1.getName()+a1.getLastName(),a1);
 		Book b1 =new Book("The Lord of the Rings - The Two Towers","00124325",a1,21);
-		// b1.setDate(LocalDate.now());
+		b1.setDate(new Date());
 		dao.save("00124325",b1);
 
 		Address add2=new Address("1100 N 4th St","Fairfield","IA",52557);
@@ -38,12 +38,13 @@ public class DBInit {
 		dao.save(a2.getName()+a2.getLastName(),a2);
 		Book b2 =new Book("I don't know this book","10166625",a2,7);
 		dao.save("10166625",b2);
+
 		Publication pub=new Publication("Times",7);
-		pub.setDate(LocalDate.of(2017,1,15));
-		dao.save(pub.getTitle()+pub.getDate().toString(),pub);
+		pub.setDate(new Date());
+		dao.save(new Integer(pub.hashCode()).toString(), pub);
 		Publication pub1=new Publication("Science",7);
-		pub1.setDate(LocalDate.of(2017,2,15));
-		dao.save(pub1.getTitle()+pub1.getDate().toString(),pub1);
+		pub1.setDate(new Date());
+		dao.save(new Integer(pub1.hashCode()).toString(), pub1);
 
 	}
 

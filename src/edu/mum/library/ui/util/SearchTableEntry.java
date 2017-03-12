@@ -1,6 +1,9 @@
 package edu.mum.library.ui.util;
 
+import java.text.SimpleDateFormat;
+
 import edu.mum.library.business.Book;
+import edu.mum.library.business.Publication;
 import javafx.beans.property.SimpleStringProperty;
 
 public class SearchTableEntry {
@@ -17,6 +20,11 @@ public class SearchTableEntry {
 
 	public SearchTableEntry(Book book) {
 		this(book.getIsbn(), book.getTitle(), book.getAuthors().toString());
+	}
+
+	public SearchTableEntry(Publication object) {
+		this(new Integer(object.hashCode()).toString(), object.getTitle(),
+				new SimpleDateFormat().format(object.getDate()));
 	}
 
 	public String getItemName() {

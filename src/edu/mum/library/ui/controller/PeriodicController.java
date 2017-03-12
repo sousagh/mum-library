@@ -1,7 +1,7 @@
 package edu.mum.library.ui.controller;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import edu.mum.library.business.Publication;
 import edu.mum.library.business.bo.PublicationBO;
@@ -26,8 +26,6 @@ public class PeriodicController {
 	@FXML
 	private Button checkoutButton;
 
-	private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM/dd/yyyy");
-
 	@FXML
 	public void initialize() {
 		SearchTableEntry entry = (SearchTableEntry) AppContext.getParam(AppContext.PUBLICATION);
@@ -36,16 +34,9 @@ public class PeriodicController {
 		Publication publication = periodicBO.findById(entry.getId());
 
 		this.namePeriodic.setText(publication.getTitle());
-		LocalDate date = publication.getDate();
+		Date date = publication.getDate();
 
-		this.datePeriodic.setText(this.formatter.format(date));
-		/*this.availability.setText(new Boolean(publication.isAvailable()).toString());
-
-		if (!publication.isAvailable()) {
-			this.checkoutButton.setDisable(true);
-		} else {
-			this.checkoutButton.setDisable(false);
-		}*/
+		this.datePeriodic.setText(new SimpleDateFormat().format(date));
 	}
 
 }

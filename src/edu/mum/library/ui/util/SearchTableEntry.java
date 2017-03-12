@@ -16,6 +16,7 @@ public class SearchTableEntry {
 		this.itemName = new SimpleStringProperty(name);
 		this.itemInfo = new SimpleStringProperty(info);
 		this.setId(id);
+
 	}
 
 	public SearchTableEntry(Book book) {
@@ -23,8 +24,9 @@ public class SearchTableEntry {
 	}
 
 	public SearchTableEntry(Publication object) {
-		this(new Integer(object.hashCode()).toString(), object.getTitle(),
+		this(object.getTitle() + new SimpleDateFormat("dd-MM-yyyy").format(object.getDate()), object.getTitle(),
 				new SimpleDateFormat().format(object.getDate()));
+		System.out.println(this.id);
 	}
 
 	public String getItemName() {

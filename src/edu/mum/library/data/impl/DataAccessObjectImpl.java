@@ -37,8 +37,8 @@ public class DataAccessObjectImpl implements DataAccessObject {
 			if (!file.exists()) {
 				file.createNewFile();
 			}
-
-			mapper.writeValue(file, object);
+			// mapper.writeValueAsString(object)
+			mapper.writerWithDefaultPrettyPrinter().writeValue(file, object);
 		} catch(IOException e) {
 			e.printStackTrace();
 		}

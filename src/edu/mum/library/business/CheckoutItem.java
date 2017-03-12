@@ -2,8 +2,11 @@ package edu.mum.library.business;
 
 import java.io.Serializable;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 public class CheckoutItem implements Serializable{
 	private static final long serialVersionUID = 1L;
+	@JsonBackReference
 	private Publication publication;
 	private int copyId;
 	private boolean isAvailable;
@@ -19,12 +22,16 @@ public class CheckoutItem implements Serializable{
 		this.isAvailable = isAvailable;
 	}
 
+	public void setPublication(Publication publication) {
+		this.publication = publication;
+	}
+
 	public Publication getPublication() {
 		return this.publication;
 	}
 
 	CheckoutItem(Publication pub,int copyId){
-		this.publication=pub;
+		this.publication = pub;
 		this.copyId=copyId;
 		this.isAvailable=true;
 	}
@@ -44,8 +51,8 @@ public class CheckoutItem implements Serializable{
 	}
 
 
-	@Override
-	public String toString() {
-		return this.publication.toString();
-	}
+	// @Override
+	// public String toString() {
+	// return this.publication.toString();
+	// }
 }

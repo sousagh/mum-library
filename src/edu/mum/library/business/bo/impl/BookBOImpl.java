@@ -60,7 +60,7 @@ public class BookBOImpl implements BookBO {
 		Book book = new Book("Lord Of the Rings", "213131", author,7);*/
 		DataAccessObject dataAccessObject = (DataAccessObject) DataObjectFactory.getDataObject(DataAccessObject.class);
 
-		return null;
+		return (Book) dataAccessObject.read(id, Book.class);
 	}
 
 	@Override

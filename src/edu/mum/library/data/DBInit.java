@@ -30,8 +30,9 @@ public class DBInit {
 		Author a1=new Author("James","Tolkien",add1,"+59898830609","Wrote the Lord of the Rings saga","This guy is awsome");
 		dao.save(a1.getName()+a1.getLastName(),a1);
 		Book b1 =new Book("The Lord of the Rings - The Two Towers","00124325",a1,21);
+		// b1.setDate(LocalDate.now());
 		dao.save("00124325",b1);
-		
+
 		Address add2=new Address("1100 N 4th St","Fairfield","IA",52557);
 		Author a2=new Author("Pablo","Neruda",add2,"+59898834020","It was mentioned on Arjona's song","Wrote some boooks");
 		dao.save(a2.getName()+a2.getLastName(),a2);
@@ -43,7 +44,7 @@ public class DBInit {
 		Publication pub1=new Publication("Science",7);
 		pub1.setDate(LocalDate.of(2017,2,15));
 		dao.save(pub1.getTitle()+pub1.getDate().toString(),pub1);
-		
+
 	}
 
 }

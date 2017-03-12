@@ -24,8 +24,8 @@ public class CheckoutEntry implements Serializable{
 	public CheckoutEntry(CheckoutItem item){
 		this.item=item;
 		this.checkoutDate=LocalDate.now();
-		int days=this.item.getPublication().getMaxDays();
-		this.dueDate=this.checkoutDate.plusDays(days);
+		// int days=this.item.getPublication().getMaxDays();
+		// this.dueDate=this.checkoutDate.plusDays(days);
 	}
 
 	public CheckoutItem getItem() {

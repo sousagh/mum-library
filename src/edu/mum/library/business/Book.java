@@ -4,12 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 public class Book extends Publication{
 
 	private static final long serialVersionUID = -6829734135257045285L;
 
 	private String isbn;
+	@JsonManagedReference
 	private List<CheckoutItem> copies;
 	private List<Author> authors;
 
@@ -38,9 +40,9 @@ public class Book extends Publication{
 		this.isbn=isbn;
 		this.authors=new ArrayList<Author>();
 		this.authors.add(author);
-		this.copies=new  ArrayList<CheckoutItem>();
+		this.setCopies(new  ArrayList<CheckoutItem>());
 		CheckoutItem item=new CheckoutItem(this,1);
-		this.copies.add(item);
+		this.getCopies().add(item);
 	}
 
 	public void addAuthor(Author author){
@@ -48,9 +50,9 @@ public class Book extends Publication{
 	}
 
 	public void addCopy(){
-		int copies=this.copies.size();
+		int copies=this.getCopies().size();
 		CheckoutItem item=new CheckoutItem(this,copies++);
-		this.copies.add(item);
+		this.getCopies().add(item);
 	}
 
 	public void checkout(){
@@ -59,7 +61,7 @@ public class Book extends Publication{
 
 	@JsonIgnore
 	public boolean isAvailable(){
-		for(CheckoutItem copy:this.copies){
+		for(CheckoutItem copy:this.getCopies()){
 			if(copy.isAvailable()){
 				return true;
 			}
@@ -70,7 +72,7 @@ public class Book extends Publication{
 	@JsonIgnore
 	public int getAvailableCopies(){
 		int sum=0;
-		for(CheckoutItem copy:this.copies){
+		for(CheckoutItem copy:this.getCopies()){
 			if(copy.isAvailable()){
 				sum++;
 			}
@@ -86,5 +88,13 @@ public class Book extends Publication{
 			sb.append(author.toString()+"\n");
 		}
 		return sb.toString();
+	}
+
+	public List<CheckoutItem> getCopies() {
+		return this.copies;
+	}
+
+	public void setCopies(List<CheckoutItem> copies) {
+		this.copies = copies;
 	}
 }

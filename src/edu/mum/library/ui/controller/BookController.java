@@ -1,6 +1,5 @@
 package edu.mum.library.ui.controller;
 
-import edu.mum.library.business.Address;
 import edu.mum.library.business.Book;
 import edu.mum.library.business.LibraryMember;
 import edu.mum.library.business.bo.BookBO;
@@ -15,10 +14,10 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Alert.AlertType;
 
 public class BookController {
 
@@ -36,13 +35,13 @@ public class BookController {
 
 	@FXML
 	private Button checkoutButton;
-	
+
 	@FXML
 	private TextField memberId;
-	
+
 	@FXML
 	private Button addCopyButton;
-	
+
 	private Book book;
 
 	@FXML
@@ -51,7 +50,7 @@ public class BookController {
 		SearchTableEntry entry = (SearchTableEntry) AppContext.getParam(AppContext.PUBLICATION);
 
 		BookBO bookBO = (BookBO) BusinessObjectFactory.getBusinessObject(BookBO.class);
-		
+
 		this.book = bookBO.findById(entry.getId());
 
 		int availableCopies2 = this.book.getAvailableCopies();
@@ -59,47 +58,56 @@ public class BookController {
 		this.nameBook.setText(this.book.getTitle());
 		this.isbnBook.setText(this.book.getIsbn());
 		this.authorBook.setText(this.book.getAuthors().toString());
-		
+
 		if (availableCopies2 < 1) {
 			this.checkoutButton.setDisable(true);
 		} else {
 			this.checkoutButton.setDisable(false);
 		}
 	}
-	
+
 
 	@FXML
-	public void checkout(ActionEvent event) { 
+	public void checkout(ActionEvent event) {
 		if (validateMemberId()) {
 			MemberBO memberBO = (MemberBO) BusinessObjectFactory.getBusinessObject(MemberBO.class);
 
-			if (!memberBO.exists(Integer.parseInt(memberId.getText()))) {
+			if (!memberBO.exists(Integer.parseInt(this.memberId.getText()))) {
 
 				Alert alert = new Alert(AlertType.WARNING);
 				alert.setTitle("Validation Error");
 				alert.setContentText("Member does not exist.");
 				alert.showAndWait();
 
-				memberId.clear();
 			} else {
-				LibraryMember member=memberBO.findById(memberId.getText());
+				LibraryMember member=memberBO.findById(this.memberId.getText());
 				memberBO.checkout(member,this.book);
-				memberId.clear();
-				Alert alert = new Alert(AlertType.INFORMATION);
-				alert.setTitle("Information Dialog");
-				alert.setHeaderText(null);
-				alert.setContentText("Successful checkout!");
-				alert.showAndWait();
-				Node node=(Node)event.getSource();
-				Scene scene=node.getScene();
-				scene.getWindow().hide();
+				showSuccessMessage();
+				hideWindow(event);
 			}
+			this.memberId.clear();
 
 		}
 	}
-	
+
+
+	private void hideWindow(ActionEvent event) {
+		Node node=(Node)event.getSource();
+		Scene scene=node.getScene();
+		scene.getWindow().hide();
+	}
+
+
+	private void showSuccessMessage() {
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.setTitle("Information Dialog");
+		alert.setHeaderText(null);
+		alert.setContentText("Successful checkout!");
+		alert.showAndWait();
+	}
+
 	@FXML
-	public void addCopy(ActionEvent event) { 
+	public void addCopy(ActionEvent event) {
 		BookBO bookBO = (BookBO) BusinessObjectFactory.getBusinessObject(BookBO.class);
 		bookBO.addCopy(this.book);;
 		Alert alert = new Alert(AlertType.INFORMATION);
@@ -109,7 +117,7 @@ public class BookController {
 		alert.showAndWait();
 		initialize();
 	}
-	
+
 	private boolean validateMemberId() {
 		StringBuilder builder = new StringBuilder();
 		if (this.memberId.getText().isEmpty()) {
@@ -128,10 +136,10 @@ public class BookController {
 			alert.setContentText(builder.toString());
 			alert.showAndWait();
 		}
-			
+
 		return valid;
 	}
-	
+
 	private void configureTextFields() {
 		this.memberId.textProperty().addListener(new ChangeListener<String>() {
 			@Override

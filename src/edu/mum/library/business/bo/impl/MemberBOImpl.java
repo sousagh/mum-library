@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 
 import edu.mum.library.business.Book;
 import edu.mum.library.business.CheckoutEntry;
+import edu.mum.library.business.CheckoutRecord;
 import edu.mum.library.business.LibraryMember;
 import edu.mum.library.business.Publication;
 import edu.mum.library.business.bo.MemberBO;
@@ -40,12 +41,17 @@ public class MemberBOImpl implements MemberBO {
 	@Override
 	public void checkout(LibraryMember member,Publication publication) {
 		CheckoutEntry entry=new CheckoutEntry(publication);
-		member.getRecord().addCheckoutEntry(entry);
+		CheckoutRecord record = member.getRecord();
+		record.addCheckoutEntry(entry);
 		DataAccessObject dao = DataObjectFactory.getDataObject();
-		dao.save(Integer.toString(member.getMemberNumber()),member);
+		String id = Integer.toString(member.getMemberNumber());
+		dao.save(id,member);
+
 		if(publication instanceof Book){
+
 			Book book=(Book)publication;
-			dao.save(book.getIsbn(), book);
+			String isbn = book.getIsbn();
+			dao.save(isbn, book);
 		}else{
 			dao.save(publication.getTitle()+new SimpleDateFormat("dd-MM-yyyy").format(publication.getDate()), publication);
 		}

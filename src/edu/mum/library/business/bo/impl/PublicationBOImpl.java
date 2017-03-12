@@ -28,7 +28,6 @@ public class PublicationBOImpl implements PublicationBO {
 		params.put("title", text);
 
 		if (value != null) {
-
 			params.put("date", this.formatter.format(value));
 		}
 

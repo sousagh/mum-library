@@ -109,9 +109,9 @@ public class HomeController {
 	@FXML
 	public void initialize() {
 
-		configureRadioButton();
-
 		configureTable();
+
+		configureRadioButton();
 
 		configureTextFields();
 
@@ -229,6 +229,7 @@ public class HomeController {
 					if (radioButton.getText().equals(BOOK)) {
 						HomeController.this.bookSearchPanel.setVisible(true);
 						HomeController.this.periodicSearchPanel.setVisible(false);
+						HomeController.this.findAllBooks();
 					} else {
 						HomeController.this.bookSearchPanel.setVisible(false);
 						HomeController.this.periodicSearchPanel.setVisible(true);
@@ -240,6 +241,13 @@ public class HomeController {
 		this.bookRadioButton.setSelected(true);
 	}
 
+	protected void findAllBooks() {
+		BookBO bookBO = (BookBO) BusinessObjectFactory.getBusinessObject(BookBO.class);
+		List<SearchTableEntry> books = bookBO.findAll();
+		this.data = FXCollections.observableArrayList(books);
+		this.searchTable.setItems(this.data);
+	}
+
 	@FXML
 	public void addMember() {
 
@@ -247,16 +255,16 @@ public class HomeController {
 			Address address = new Address(this.streetMember.getText(),this.cityMember.getText(),this.stateMember.getText(),Integer.parseInt(this.zipCodeMember.getText()));
 			LibraryMember member = new LibraryMember(new Integer(this.idMember.getText()),this.firstNameMember.getText(),this.lastNameMember.getText(),address,this.phoneNumberMember.getText());
 			MemberBO memberBO = (MemberBO) BusinessObjectFactory.getBusinessObject(MemberBO.class);
-		
+
 			if (!memberBO.exists(member.getMemberNumber())) {
 				memberBO.addMember(member);
-			
+
 				Alert alert = new Alert(AlertType.INFORMATION);
 				alert.setTitle("Information Dialog");
 				alert.setHeaderText(null);
 				alert.setContentText("Success!");
 				alert.showAndWait();
-			
+
 				this.clearMemberTab();
 			} else {
 				Alert alert = new Alert(AlertType.WARNING);
@@ -264,7 +272,7 @@ public class HomeController {
 				alert.setContentText("Member already exists.");
 				alert.showAndWait();
 			}
-	
+
 		}
 	}
 

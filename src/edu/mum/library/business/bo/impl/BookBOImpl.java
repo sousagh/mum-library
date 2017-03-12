@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import edu.mum.library.business.Author;
 import edu.mum.library.business.Book;
 import edu.mum.library.business.bo.BookBO;
 import edu.mum.library.data.DataAccessObject;
@@ -60,7 +59,19 @@ public class BookBOImpl implements BookBO {
 		author.setCredentials("ASDFGGFD-WER");
 		Book book = new Book("Lord Of the Rings", "213131", author,7);*/
 		DataAccessObject dataAccessObject = (DataAccessObject) DataObjectFactory.getDataObject(DataAccessObject.class);
-		
+
 		return null;
+	}
+
+	@Override
+	public List<SearchTableEntry> findAll() {
+		DataAccessObject dao = (DataAccessObject) DataObjectFactory.getDataObject(DataAccessObject.class);
+
+		List<Object> bookList = dao.findAll(Book.class);
+		List<SearchTableEntry> books = new ArrayList<>();
+		for (Object object : bookList) {
+			books.add(new SearchTableEntry((Book) object));
+		}
+		return books;
 	}
 }

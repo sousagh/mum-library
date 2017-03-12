@@ -2,7 +2,9 @@ package edu.mum.library.data.impl;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -10,6 +12,7 @@ import java.util.Set;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import edu.mum.library.business.Book;
 import edu.mum.library.data.DataAccessObject;
 
 public class DataAccessObjectImpl implements DataAccessObject {
@@ -92,6 +95,28 @@ public class DataAccessObjectImpl implements DataAccessObject {
 				}
 			}
 
+		}
+		return objects;
+	}
+
+	@Override
+	public List<Object> findAll(Class<Book> clazz) {
+		List<Object> objects = new ArrayList<>();
+		File file = new File(OUTPUT_DIR + clazz.getSimpleName());
+		ObjectMapper mapper = new ObjectMapper();
+		if (file.isDirectory()) {
+			File[] listFiles = file.listFiles();
+			for (File file2 : listFiles) {
+				if (file2.getName().endsWith(JSON)) {
+
+					try {
+						objects.add(mapper.readValue(file2, clazz));
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			}
 		}
 		return objects;
 	}

@@ -24,7 +24,7 @@
       <Text layoutX="61.0" layoutY="163.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ISBN:" />
       <Button fx:id="checkoutButton" layoutX="56.0" layoutY="286.0" mnemonicParsing="false" onAction="#checkout" text="Checkout" />
       <TextField fx:id="memberId" layoutX="165.0" layoutY="286.0" />
-      <Button layoutX="440.0" layoutY="286.0" mnemonicParsing="false" text="Add Copy" />
+      <Button fx:id="addcopyButton" layoutX="440.0" layoutY="286.0" mnemonicParsing="false" onAction="#addCopy" text="Add Copy" />
       <Label fx:id="availableCopies" layoutX="133.0" layoutY="88.0" text="-" />
       <Label fx:id="nameBook" layoutX="133.0" layoutY="118.0" text="-" />
       <Label fx:id="isbnBook" layoutX="133.0" layoutY="150.0" text="-" />

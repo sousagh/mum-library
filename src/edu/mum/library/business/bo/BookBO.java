@@ -12,5 +12,6 @@ public interface BookBO {
 	Book findById(String string);
 
 	List<SearchTableEntry> findAll();
-
+	
+	void addCopy(Book book);
 }

@@ -56,4 +56,11 @@ public class BookBOImpl implements BookBO {
 		}
 		return books;
 	}
+
+	@Override
+	public void addCopy(Book book) {
+		book.addCopy();
+		DataAccessObject dao = (DataAccessObject) DataObjectFactory.getDataObject(DataAccessObject.class);
+		dao.save(book.getIsbn(), book);
+	}
 }

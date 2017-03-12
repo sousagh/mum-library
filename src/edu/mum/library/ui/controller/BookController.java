@@ -40,7 +40,9 @@ public class BookController {
 	@FXML
 	private TextField memberId;
 	
-
+	@FXML
+	private Button addCopyButton;
+	
 	private Book book;
 
 	@FXML
@@ -94,6 +96,18 @@ public class BookController {
 			}
 
 		}
+	}
+	
+	@FXML
+	public void addCopy(ActionEvent event) { 
+		BookBO bookBO = (BookBO) BusinessObjectFactory.getBusinessObject(BookBO.class);
+		bookBO.addCopy(this.book);;
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.setTitle("Information Dialog");
+		alert.setHeaderText(null);
+		alert.setContentText("Copy added successfully!");
+		alert.showAndWait();
+		initialize();
 	}
 	
 	private boolean validateMemberId() {

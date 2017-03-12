@@ -23,7 +23,7 @@ public class PublicationBOImpl implements PublicationBO {
 	@Override
 	public Publication findById(String id) {
 
-		Publication publication = new Publication("Times");
+		Publication publication = new Publication("Times",7);
 		publication.setDate(LocalDate.now());
 		return publication;
 	}

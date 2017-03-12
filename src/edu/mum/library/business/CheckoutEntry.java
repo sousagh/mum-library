@@ -15,10 +15,11 @@ public class CheckoutEntry implements Serializable{
 	private LocalDate checkoutDate;
 	private LocalDate dueDate;
 	
-	public CheckoutEntry(CheckoutItem item, LocalDate dueDate){
+	public CheckoutEntry(CheckoutItem item){
 		this.item=item;
 		this.checkoutDate=LocalDate.now();
-		this.dueDate=dueDate;
+		int days=this.item.getPublication().getMaxDays();
+		this.dueDate=checkoutDate.plusDays(days);
 	}
 
 	public CheckoutItem getItem() {

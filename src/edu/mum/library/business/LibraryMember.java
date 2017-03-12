@@ -8,15 +8,9 @@ public class LibraryMember extends Person implements Serializable {
 	private CheckoutRecord record;
 
 	public LibraryMember(int num,String name,String lastName,Address address,String phoneNumber){
+		super(name,lastName,address,phoneNumber);
 		this.memberNumber=num;
-		this.name=name;
-		this.lastName=lastName;
-		this.address=address;
-		this.phoneNumber=phoneNumber;
 		this.record=new CheckoutRecord();
-	}
-
-	public LibraryMember() {
 	}
 
 	public CheckoutRecord getRecord() {

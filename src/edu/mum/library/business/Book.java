@@ -12,11 +12,7 @@ public class Book extends Publication{
 	private String isbn;
 	private List<CheckoutItem> copies;
 	private List<Author> authors;
-	private int maxDays;
-
-	public int getMaxDays() {
-		return this.maxDays;
-	}
+	
 
 	public String getIsbn() {
 		return this.isbn;
@@ -35,17 +31,13 @@ public class Book extends Publication{
 	}
 
 	public Book(String title,String isbn,Author author, int days){
-		super(title);
+		super(title,days);
 		this.isbn=isbn;
 		this.authors=new ArrayList<Author>();
 		this.authors.add(author);
-		this.maxDays=days;
 		this.copies=new  ArrayList<CheckoutItem>();
 		CheckoutItem item=new CheckoutItem(this,1);
 		this.copies.add(item);
-	}
-
-	public Book() {
 	}
 
 	public void addAuthor(Author author){

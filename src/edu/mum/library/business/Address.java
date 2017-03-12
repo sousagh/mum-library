@@ -1,25 +1,22 @@
 package edu.mum.library.business;
 
 public class Address {
-	private String zipCode;
+	private int zipCode;
 	private String state;
 	private String city;
 	private String street;
 
-	public Address(String street,String city,String state,String zipCode){
+	public Address(String street,String city,String state,int zipCode){
 		this.city=city;
 		this.street=street;
 		this.state=state;
 		this.zipCode=zipCode;
 	}
 
-	public Address() {
-	}
-
-	public String getZipCode() {
+	public int getZipCode() {
 		return this.zipCode;
 	}
-	public void setZipCode(String zipCode) {
+	public void setZipCode(int zipCode) {
 		this.zipCode = zipCode;
 	}
 	public String getState() {

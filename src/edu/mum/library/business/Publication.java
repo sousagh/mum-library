@@ -8,12 +8,18 @@ public class Publication implements Serializable {
 	private static final long serialVersionUID = -4247133156571196244L;
 	protected String title;
 	protected LocalDate date;
+	protected int maxDays;
 
-	public Publication() {
-
+	public int getMaxDays() {
+		return maxDays;
 	}
 
-	public Publication(String title){
+	public void setMaxDays(int maxDays) {
+		this.maxDays = maxDays;
+	}
+
+
+	public Publication(String title, int maxDays){
 		this.title=title;
 	}
 

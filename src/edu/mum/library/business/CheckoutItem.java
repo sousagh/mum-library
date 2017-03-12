@@ -19,8 +19,11 @@ public class CheckoutItem implements Serializable{
 		this.isAvailable = isAvailable;
 	}
 
-
-	public CheckoutItem(Publication pub,int copyId){
+	public Publication getPublication() {
+		return publication;
+	}
+	 
+	CheckoutItem(Publication pub,int copyId){
 		this.publication=pub;
 		this.copyId=copyId;
 		this.isAvailable=true;
@@ -35,9 +38,7 @@ public class CheckoutItem implements Serializable{
 	public void setCopyId(int copyId){
 		this.copyId=copyId;
 	}
-	public void setPublication(Publication publication) {
-		this.publication = publication;
-	}
+	
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}

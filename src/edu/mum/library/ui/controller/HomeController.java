@@ -209,7 +209,13 @@ public class HomeController {
 
 			alert.showAndWait();
 		} else {
-			Address address = new Address(this.streetMember.getText(),this.cityMember.getText(),this.stateMember.getText(),this.zipCodeMember.getText());
+			int zip=0;
+			try{
+				zip=Integer.parseInt(this.zipCodeMember.getText());
+			}catch(Exception e){
+				new Exception("Zip code must be an Integer");
+			}
+			Address address = new Address(this.streetMember.getText(),this.cityMember.getText(),this.stateMember.getText(),zip);
 			LibraryMember member = new LibraryMember(new Integer(this.idMember.getText()),this.firstNameMember.getText(),this.lastNameMember.getText(),address,this.phoneNumberMember.getText());
 			MemberBO memberBO = (MemberBO) BusinessObjectFactory.getBusinessObject(MemberBO.class);
 			memberBO.addMember(member);

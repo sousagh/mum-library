@@ -35,18 +35,16 @@ public class DBInit {
 		b1.setDate(new Date());
 		dao.save("00124325", b1);
 
-		Address add2 = new Address("1100 N 4th St", "Fairfield", "IA", 52557);
-		Author a2 = new Author("Pablo", "Neruda", add2, "+59898834020", "It was mentioned on Arjona's song",
-				"Wrote some boooks");
-		dao.save(a2.getName() + a2.getLastName(), a2);
-		Book b2 = new Book("I don't know this book", "10166625", a2, 7);
-		dao.save("10166625", b2);
 
-		Publication pub = new Publication("Times", 7);
+		Address add2=new Address("1100 N 4th St","Fairfield","IA",52557);
+		Author a2=new Author("Pablo","Neruda",add2,"+59898834020","It was mentioned on Arjona's song","Wrote some boooks");
+		dao.save(a2.getName()+a2.getLastName(),a2);
+		Book b2 =new Book("I don't know this book","10166625",a2,7);
+		dao.save("10166625",b2);
+		Publication pub=new Publication("Times",7);
 		pub.setDate(new Date());
 		dao.save(pub.getTitle() + new SimpleDateFormat("dd-MM-yyyy").format(new Date()), pub);
-
-		Publication pub1 = new Publication("Science", 7);
+		Publication pub1=new Publication("Science",7);
 		pub1.setDate(new Date());
 		dao.save(pub1.getTitle() + new SimpleDateFormat("dd-MM-yyyy").format(new Date()), pub1);
 

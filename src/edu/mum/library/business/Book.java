@@ -11,8 +11,7 @@ public class Book extends Publication{
 	private static final long serialVersionUID = -6829734135257045285L;
 
 	private String isbn;
-	@JsonManagedReference
-	private List<CheckoutItem> copies;
+	private List<BookCopy> copies;
 	private List<Author> authors;
 
 	public Book() {
@@ -40,8 +39,8 @@ public class Book extends Publication{
 		this.isbn=isbn;
 		this.authors=new ArrayList<Author>();
 		this.authors.add(author);
-		this.setCopies(new  ArrayList<CheckoutItem>());
-		CheckoutItem item=new CheckoutItem(this,1);
+		this.setCopies(new  ArrayList<BookCopy>());
+		BookCopy item=new BookCopy(1);
 		this.getCopies().add(item);
 	}
 
@@ -51,28 +50,35 @@ public class Book extends Publication{
 
 	public void addCopy(){
 		int copies=this.getCopies().size();
-		CheckoutItem item=new CheckoutItem(this,copies++);
+		BookCopy item=new BookCopy(copies+1);
 		this.getCopies().add(item);
 	}
-
+	
+	@Override
 	public void checkout(){
-
+		for(BookCopy copy:this.getCopies()){
+			if(copy.isAvailable()){
+				copy.setAvailable(false);
+			}
+		}
 	}
 
 	@JsonIgnore
 	public boolean isAvailable(){
-		for(CheckoutItem copy:this.getCopies()){
+		boolean aux=false;
+		for(BookCopy copy:this.getCopies()){
 			if(copy.isAvailable()){
-				return true;
+				aux=true;
 			}
 		}
-		return false;
+		this.available=aux;
+		return this.available;
 	}
 
 	@JsonIgnore
 	public int getAvailableCopies(){
 		int sum=0;
-		for(CheckoutItem copy:this.getCopies()){
+		for(BookCopy copy:this.getCopies()){
 			if(copy.isAvailable()){
 				sum++;
 			}
@@ -90,11 +96,11 @@ public class Book extends Publication{
 		return sb.toString();
 	}
 
-	public List<CheckoutItem> getCopies() {
+	public List<BookCopy> getCopies() {
 		return this.copies;
 	}
 
-	public void setCopies(List<CheckoutItem> copies) {
+	public void setCopies(List<BookCopy> copies) {
 		this.copies = copies;
 	}
 }

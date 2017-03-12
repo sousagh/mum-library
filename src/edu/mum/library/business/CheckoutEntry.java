@@ -8,47 +8,54 @@ import edu.mum.library.data.impl.DataAccessObjectImpl;
 
 public class CheckoutEntry implements Serializable{
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = -8270653102635166719L;
 	private CheckoutItem item;
 	private LocalDate checkoutDate;
 	private LocalDate dueDate;
-	
+
+	/**
+	 * Just for the use of Jackson API;
+	 */
+	public CheckoutEntry() {
+	}
+
 	public CheckoutEntry(CheckoutItem item){
 		this.item=item;
 		this.checkoutDate=LocalDate.now();
 		int days=this.item.getPublication().getMaxDays();
-		this.dueDate=checkoutDate.plusDays(days);
+		this.dueDate=this.checkoutDate.plusDays(days);
 	}
 
 	public CheckoutItem getItem() {
-		return item;
+		return this.item;
 	}
 	public void setItem(CheckoutItem item) {
 		this.item = item;
 	}
 	public LocalDate getCheckoutDate() {
-		return checkoutDate;
+		return this.checkoutDate;
 	}
 	public void setCheckoutDate(LocalDate checkoutDate) {
 		this.checkoutDate = checkoutDate;
 	}
 	public LocalDate getDueDate() {
-		return dueDate;
+		return this.dueDate;
 	}
 	public void setDueDate(LocalDate dueDate) {
 		this.dueDate = dueDate;
 	}
-	
+
+	@Override
 	public String toString(){
 		StringBuilder sb=new StringBuilder();
 		sb.append("[" + "checkoutdate:" );
-		sb.append(checkoutDate.format(DateTimeFormatter.ofPattern(DataAccessObjectImpl.DATE_PATTERN)));
-		sb.append(", dueDate: " + dueDate.format(DateTimeFormatter.ofPattern(DataAccessObjectImpl.DATE_PATTERN)));
-		sb.append(", publication: " + item + "]");
+		sb.append(this.checkoutDate.format(DateTimeFormatter.ofPattern(DataAccessObjectImpl.DATE_PATTERN)));
+		sb.append(", dueDate: " + this.dueDate.format(DateTimeFormatter.ofPattern(DataAccessObjectImpl.DATE_PATTERN)));
+		sb.append(", publication: " + this.item + "]");
 		return sb.toString();
 	}
-	
-	
+
+
 }

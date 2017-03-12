@@ -13,6 +13,12 @@ public class Address {
 		this.zipCode=zipCode;
 	}
 
+	/**
+	 * Just for the use of Jackson API;
+	 */
+	public Address() {
+	}
+
 	public int getZipCode() {
 		return this.zipCode;
 	}

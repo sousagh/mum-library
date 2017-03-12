@@ -10,8 +10,11 @@ public class Publication implements Serializable {
 	protected LocalDate date;
 	protected int maxDays;
 
+	public Publication() {
+	}
+
 	public int getMaxDays() {
-		return maxDays;
+		return this.maxDays;
 	}
 
 	public void setMaxDays(int maxDays) {

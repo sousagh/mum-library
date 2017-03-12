@@ -12,7 +12,10 @@ public class Book extends Publication{
 	private String isbn;
 	private List<CheckoutItem> copies;
 	private List<Author> authors;
-	
+
+	public Book() {
+
+	}
 
 	public String getIsbn() {
 		return this.isbn;

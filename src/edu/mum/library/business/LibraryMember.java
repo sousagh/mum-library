@@ -13,6 +13,10 @@ public class LibraryMember extends Person implements Serializable {
 		this.record=new CheckoutRecord();
 	}
 
+	public LibraryMember() {
+
+	}
+
 	public CheckoutRecord getRecord() {
 		return this.record;
 	}

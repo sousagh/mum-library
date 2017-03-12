@@ -3,16 +3,16 @@ package edu.mum.library.business;
 import java.io.Serializable;
 
 public class CheckoutItem implements Serializable{
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private Publication publication;
 	private int copyId;
 	private boolean isAvailable;
-	
+
+	public CheckoutItem() {
+	}
+
 	public boolean isAvailable() {
-		return isAvailable;
+		return this.isAvailable;
 	}
 
 	public void setAvailable(boolean isAvailable) {
@@ -20,31 +20,32 @@ public class CheckoutItem implements Serializable{
 	}
 
 	public Publication getPublication() {
-		return publication;
+		return this.publication;
 	}
-	 
+
 	CheckoutItem(Publication pub,int copyId){
 		this.publication=pub;
 		this.copyId=copyId;
 		this.isAvailable=true;
 	}
-	
-	
-	
+
+
+
 	public int getCopyId() {
-		return copyId;
+		return this.copyId;
 	}
-	
+
 	public void setCopyId(int copyId){
 		this.copyId=copyId;
 	}
-	
+
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	
-	
+
+
+	@Override
 	public String toString() {
-		return publication.toString();
+		return this.publication.toString();
 	}
 }

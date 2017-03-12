@@ -9,17 +9,24 @@ import edu.mum.library.data.impl.DataObjectFactory;
 public class MemberBOImpl implements MemberBO {
 
 	MemberBOImpl() {
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public void addMember(LibraryMember member) {
-		DataAccessObject mda = (DataAccessObjectImpl) DataObjectFactory.getDataObject(DataAccessObject.class);
+		DataAccessObject dao = (DataAccessObjectImpl) DataObjectFactory.getDataObject(DataAccessObject.class);
 		String id = new Integer(member.getMemberNumber()).toString();
-		mda.save(id, member);
+		dao.save(id, member);
 
-		member = (LibraryMember) mda.read(id, LibraryMember.class);
-		System.out.println(member.toString());
+		member = (LibraryMember) dao.read(id, LibraryMember.class);
+	}
+
+	@Override
+	public boolean exists(int memberNumber) {
+		DataAccessObject dao = (DataAccessObjectImpl) DataObjectFactory.getDataObject(DataAccessObject.class);
+		String id = new Integer(memberNumber).toString();
+		LibraryMember member = (LibraryMember) dao.read(id, LibraryMember.class);
+
+		return member != null;
 	}
 
 }

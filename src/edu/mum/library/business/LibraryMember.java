@@ -37,4 +37,15 @@ public class LibraryMember extends Person implements Serializable {
 	public String toString(){
 		return this.memberNumber+", "+super.toString();
 	}
+
+	public String print() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("================================================================\n");
+
+		builder.append("Name: ").append(this.name).append(" ").append(this.lastName).append("\n");
+		builder.append("Member ID: ").append(this.memberNumber).append("\n");
+		builder.append("Phone: ").append(this.phoneNumber).append("\n");
+		builder.append(this.record.print());
+		return builder.toString();
+	}
 }

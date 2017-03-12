@@ -30,6 +30,7 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
@@ -107,6 +108,12 @@ public class HomeController {
 	private Tab addMemberTab;
 
 	@FXML
+	private TextField printMemberId;
+
+	@FXML
+	private TextArea memberDetails;
+
+	@FXML
 	public void initialize() {
 
 		configureTable();
@@ -156,6 +163,25 @@ public class HomeController {
 				}
 			}
 		});
+	}
+
+	@FXML
+	public void printMember() {
+
+		MemberBO memberBO = (MemberBO) BusinessObjectFactory.getBusinessObject(MemberBO.class);
+
+		if (memberBO.exists(new Integer(this.printMemberId.getText()))) {
+			LibraryMember member = memberBO.findById(this.printMemberId.getText());
+			String print = member.print();
+			System.out.println(print);
+			this.memberDetails.setText(print);
+		} else {
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.setTitle("Error");
+			alert.setContentText("Member doesn't exist.");
+			alert.showAndWait();
+		}
+
 	}
 
 	@FXML

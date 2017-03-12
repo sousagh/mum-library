@@ -1,12 +1,11 @@
 package edu.mum.library.business;
 
 import java.io.Serializable;
-import java.time.format.DateTimeFormatter;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-
-import edu.mum.library.data.impl.DataAccessObjectImpl;
 
 public class CheckoutEntry implements Serializable{
 	/**
@@ -56,11 +55,19 @@ public class CheckoutEntry implements Serializable{
 	public String toString(){
 		StringBuilder sb=new StringBuilder();
 		sb.append("[" + "checkoutdate:" );
-		//sb.append(this.checkoutDate.format(DateTimeFormatter.ofPattern(DataAccessObjectImpl.DATE_PATTERN)));
-		//sb.append(", dueDate: " + this.dueDate.format(DateTimeFormatter.ofPattern(DataAccessObjectImpl.DATE_PATTERN)));
 		sb.append(", publication: " + this.publication + "]");
 		return sb.toString();
 	}
 
+	public String print() {
+		DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+		StringBuilder builder = new StringBuilder();
+
+		builder.append("-------------------------------------------------------------------\n");
+		builder.append(this.publication.getTitle()).append("\n");
+		builder.append(" - Checkout date: ").append(dateFormat.format(this.checkoutDate)).append("\n");
+		builder.append(" - Due date: ").append(dateFormat.format(this.dueDate)).append("\n");
+		return builder.toString();
+	}
 
 }

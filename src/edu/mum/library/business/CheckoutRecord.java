@@ -24,5 +24,15 @@ public class CheckoutRecord implements Serializable{
 		this.entries.add(entry);
 	}
 
+	public String print() {
+		StringBuilder builder = new StringBuilder();
+
+		builder.append("Checkout Record: ").append("\n").append("\n");
+
+		for (CheckoutEntry checkoutEntry : this.entries) {
+			builder.append(checkoutEntry.print()).append("\n");
+		}
+		return builder.toString();
+	}
 
 }

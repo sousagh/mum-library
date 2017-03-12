@@ -20,7 +20,7 @@ public class BookBOImpl implements BookBO {
 	@Override
 	public List<SearchTableEntry> search(String name, String isbn, String author) {
 
-		DataAccessObject dataAccessObject = (DataAccessObject) DataObjectFactory.getDataObject(DataAccessObject.class);
+		DataAccessObject dataAccessObject = DataObjectFactory.getDataObject();
 
 		Map<String, String> params = new HashMap<>();
 
@@ -40,14 +40,14 @@ public class BookBOImpl implements BookBO {
 	@Override
 	public Book findById(String id) {
 
-		DataAccessObject dataAccessObject = (DataAccessObject) DataObjectFactory.getDataObject(DataAccessObject.class);
+		DataAccessObject dataAccessObject = DataObjectFactory.getDataObject();
 
 		return (Book) dataAccessObject.read(id, Book.class);
 	}
 
 	@Override
 	public List<SearchTableEntry> findAll() {
-		DataAccessObject dao = (DataAccessObject) DataObjectFactory.getDataObject(DataAccessObject.class);
+		DataAccessObject dao = DataObjectFactory.getDataObject();
 
 		List<Object> bookList = dao.findAll(Book.class);
 		List<SearchTableEntry> books = new ArrayList<>();
@@ -60,7 +60,7 @@ public class BookBOImpl implements BookBO {
 	@Override
 	public void addCopy(Book book) {
 		book.addCopy();
-		DataAccessObject dao = (DataAccessObject) DataObjectFactory.getDataObject(DataAccessObject.class);
+		DataAccessObject dao = DataObjectFactory.getDataObject();
 		dao.save(book.getIsbn(), book);
 	}
 }

@@ -15,7 +15,7 @@ import edu.mum.library.data.impl.DataObjectFactory;
 public class DBInit {
 
 	public static void populate() {
-		DataAccessObject dao = (DataAccessObjectImpl) DataObjectFactory.getDataObject(DataAccessObject.class);
+		DataAccessObject dao = (DataAccessObjectImpl) DataObjectFactory.getDataObject();
 
 		String password = "123";
 		User user = new User("lib", password, Role.LIBRARIAN);

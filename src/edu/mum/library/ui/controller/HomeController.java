@@ -260,18 +260,16 @@ public class HomeController {
 	public void addMember() {
 
 		if (validateAddMember()) {
+			Integer id = new Integer(this.idMember.getText());
 			Address address = new Address(this.streetMember.getText(),this.cityMember.getText(),this.stateMember.getText(),Integer.parseInt(this.zipCodeMember.getText()));
-			LibraryMember member = new LibraryMember(new Integer(this.idMember.getText()),this.firstNameMember.getText(),this.lastNameMember.getText(),address,this.phoneNumberMember.getText());
+			LibraryMember member = new LibraryMember(id,this.firstNameMember.getText(),this.lastNameMember.getText(),address,this.phoneNumberMember.getText());
+
 			MemberBO memberBO = (MemberBO) BusinessObjectFactory.getBusinessObject(MemberBO.class);
 
-			if (!memberBO.exists(member.getMemberNumber())) {
+			if (!memberBO.exists(id)) {
 				memberBO.addMember(member);
 
-				Alert alert = new Alert(AlertType.INFORMATION);
-				alert.setTitle("Information Dialog");
-				alert.setHeaderText(null);
-				alert.setContentText("Success!");
-				alert.showAndWait();
+				showSuccesMessage();
 
 				this.clearMemberTab();
 			} else {
@@ -282,6 +280,14 @@ public class HomeController {
 			}
 
 		}
+	}
+
+	private void showSuccesMessage() {
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.setTitle("Information Dialog");
+		alert.setHeaderText(null);
+		alert.setContentText("Success!");
+		alert.showAndWait();
 	}
 
 	private boolean validateAddMember() {

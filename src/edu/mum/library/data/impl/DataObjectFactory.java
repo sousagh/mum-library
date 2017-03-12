@@ -1,22 +1,15 @@
 package edu.mum.library.data.impl;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import edu.mum.library.data.DataAccessObject;
 
-
-
 public final class DataObjectFactory {
-	private static Map<Class<?>, Object> dataObjects = new HashMap<>();
+	private static DataAccessObject dao = new DataAccessObjectImpl();
 
-	static {
-		dataObjects.put(DataAccessObject.class, new DataAccessObjectImpl());
-
+	private DataObjectFactory() {
 	}
 
-	public static Object getDataObject(Class<?> class1) {
+	public static DataAccessObject getDataObject() {
 
-		return dataObjects.get(class1);
+		return dao;
 	}
 }

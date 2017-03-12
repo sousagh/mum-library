@@ -3,7 +3,6 @@ package edu.mum.library.business.bo.impl;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,7 +21,7 @@ public class PublicationBOImpl implements PublicationBO {
 	@Override
 	public List<SearchTableEntry> search(String text, LocalDate value) {
 
-		DataAccessObject dataAccessObject = (DataAccessObject) DataObjectFactory.getDataObject(DataAccessObject.class);
+		DataAccessObject dataAccessObject = DataObjectFactory.getDataObject();
 
 		Map<String, String> params = new HashMap<>();
 
@@ -43,14 +42,14 @@ public class PublicationBOImpl implements PublicationBO {
 	@Override
 	public Publication findById(String id) {
 
-		DataAccessObject dataAccessObject = (DataAccessObject) DataObjectFactory.getDataObject(DataAccessObject.class);
+		DataAccessObject dataAccessObject = DataObjectFactory.getDataObject();
 
 		return (Publication) dataAccessObject.read(id, Publication.class);
 	}
 
 	@Override
 	public List<SearchTableEntry> findAll() {
-		DataAccessObject dao = (DataAccessObject) DataObjectFactory.getDataObject(DataAccessObject.class);
+		DataAccessObject dao = DataObjectFactory.getDataObject();
 
 		List<Object> publicationList = dao.findAll(Publication.class);
 		List<SearchTableEntry> books = new ArrayList<>();

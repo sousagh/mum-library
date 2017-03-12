@@ -33,6 +33,6 @@ public class Author extends Person implements Serializable{
 
 	@Override
 	public String toString(){
-		return super.toString()+"\n"+this.credentials+"\n"+this.bio;
+		return this.name + " " + this.lastName + " - " + this.credentials;
 	}
 }

@@ -1,5 +1,6 @@
 package edu.mum.library.ui.util;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
 import edu.mum.library.business.Book;
@@ -11,12 +12,12 @@ public class SearchTableEntry {
 	private String id;
 	private SimpleStringProperty itemName;
 	private SimpleStringProperty itemInfo;
+	private static DateFormat format = new SimpleDateFormat("dd-MM-yyyy");
 
 	public SearchTableEntry(String id, String name, String info) {
 		this.itemName = new SimpleStringProperty(name);
 		this.itemInfo = new SimpleStringProperty(info);
 		this.setId(id);
-
 	}
 
 	public SearchTableEntry(Book book) {
@@ -24,9 +25,8 @@ public class SearchTableEntry {
 	}
 
 	public SearchTableEntry(Publication object) {
-		this(object.getTitle() + new SimpleDateFormat("dd-MM-yyyy").format(object.getDate()), object.getTitle(),
-				new SimpleDateFormat().format(object.getDate()));
-		System.out.println(this.id);
+		this(object.getTitle() + format.format(object.getDate()), object.getTitle(),
+				format.format(object.getDate()));
 	}
 
 	public String getItemName() {

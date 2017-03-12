@@ -15,8 +15,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.mum.library.data.DataAccessObject;
 
 public class DataAccessObjectImpl implements DataAccessObject {
-	public static final String OUTPUT_DIR = ".." + File.separator + "data" + File.separator;
-	public static final String DATE_PATTERN = "MM/dd/yyyy";
+	public static final String OUTPUT_DIR = "." + File.separator + "data" + File.separator;
 	private static final String JSON = ".json";
 
 
@@ -65,29 +64,30 @@ public class DataAccessObjectImpl implements DataAccessObject {
 
 		Set<Object> objects = new HashSet<>();
 
-		File file = new File(OUTPUT_DIR + clazz.getSimpleName());
-		if (file.isDirectory()) {
-			File[] listFiles = file.listFiles();
+		File directory = new File(OUTPUT_DIR + clazz.getSimpleName());
+		if (directory.isDirectory()) {
+			File[] listFiles = directory.listFiles();
 
-			for (File file2 : listFiles) {
-				if(file2.getName().endsWith(JSON)){
+			for (File file : listFiles) {
+				if(file.getName().endsWith(JSON)){
 					ObjectMapper mapper = new ObjectMapper();
 					try {
-						JsonNode member = mapper.readValue(file2, JsonNode.class);
+						JsonNode member = mapper.readValue(file, JsonNode.class);
 
 						for (Entry<String, String> entry : params.entrySet()) {
 							String searchParamValue = entry.getValue();
 							if (!searchParamValue.isEmpty()) {
 								Object objectValue = member.get(entry.getKey());
-								if (objectValue != null && objectValue.toString().contains(searchParamValue)) {
 
-									objects.add(mapper.readValue(file2, clazz));
+								if (objectValue != null && objectValue.toString().toLowerCase()
+										.contains(searchParamValue.toLowerCase())) {
+
+									objects.add(mapper.readValue(file, clazz));
 								}
 							}
 						}
 
 					} catch (IOException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 				}
@@ -110,7 +110,6 @@ public class DataAccessObjectImpl implements DataAccessObject {
 					try {
 						objects.add(mapper.readValue(file2, clazz));
 					} catch (IOException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 				}

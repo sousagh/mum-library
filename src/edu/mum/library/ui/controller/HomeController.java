@@ -229,7 +229,6 @@ public class HomeController {
 						stage.setScene(new Scene(root));
 						stage.show();
 
-						System.out.println(rowData);
 					} catch (IOException e) {
 						e.printStackTrace();
 					}

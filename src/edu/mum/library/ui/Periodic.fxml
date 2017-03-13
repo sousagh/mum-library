@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
@@ -11,7 +7,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="267.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.mum.library.ui.controller.PeriodicController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="267.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.mum.library.ui.controller.PeriodicController">
    <children>
       <Text layoutX="208.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Periodic Details">
          <font>
@@ -26,6 +22,6 @@
       <TextField fx:id="memberId" layoutX="183.0" layoutY="200.0" />
       <Text layoutX="300.0" layoutY="143.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Available:" />
       <Label fx:id="availability" layoutX="369.0" layoutY="130.0" text="-" />
-      <Text layoutX="183.0" layoutY="196.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Member Id:" />
+      <Text fx:id="memberLabel" layoutX="183.0" layoutY="196.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Member Id:" />
    </children>
 </AnchorPane>

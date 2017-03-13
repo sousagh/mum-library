@@ -19,3 +19,11 @@ Member IDs:
 
 These IDs are always available for tests.
 
+Users:
+
+  - lib - LIBRARIAN 
+  - admin - ADMINISTRATOR
+  - super _ SUPER
+
+For all of them, the password is 123.
+

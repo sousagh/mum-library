@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 public class Book extends Publication{
 
@@ -53,16 +52,18 @@ public class Book extends Publication{
 		BookCopy item=new BookCopy(copies+1);
 		this.getCopies().add(item);
 	}
-	
+
 	@Override
 	public void checkout(){
 		for(BookCopy copy:this.getCopies()){
 			if(copy.isAvailable()){
 				copy.setAvailable(false);
+				break;
 			}
 		}
 	}
 
+	@Override
 	@JsonIgnore
 	public boolean isAvailable(){
 		boolean aux=false;

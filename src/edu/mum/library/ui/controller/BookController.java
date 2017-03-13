@@ -2,6 +2,8 @@ package edu.mum.library.ui.controller;
 
 import edu.mum.library.business.Book;
 import edu.mum.library.business.LibraryMember;
+import edu.mum.library.business.Role;
+import edu.mum.library.business.User;
 import edu.mum.library.business.bo.BookBO;
 import edu.mum.library.business.bo.MemberBO;
 import edu.mum.library.business.bo.impl.BusinessObjectFactory;
@@ -42,11 +44,25 @@ public class BookController {
 	@FXML
 	private Button addCopyButton;
 
+	@FXML
+	private Label memberLabel;
+
 	private Book book;
 
 	@FXML
 	public void initialize() {
 		configureTextFields();
+		User user = (User) AppContext.getParam(AppContext.USER);
+
+		if (user.getRole().equals(Role.ADMINISTRATOR)) {
+			this.checkoutButton.setVisible(false);
+			this.memberId.setVisible(false);
+			this.memberLabel.setVisible(false);
+		}
+		if (user.getRole().equals(Role.LIBRARIAN)) {
+			this.addCopyButton.setVisible(false);
+		}
+
 		SearchTableEntry entry = (SearchTableEntry) AppContext.getParam(AppContext.PUBLICATION);
 
 		BookBO bookBO = (BookBO) BusinessObjectFactory.getBusinessObject(BookBO.class);
@@ -109,7 +125,7 @@ public class BookController {
 	@FXML
 	public void addCopy(ActionEvent event) {
 		BookBO bookBO = (BookBO) BusinessObjectFactory.getBusinessObject(BookBO.class);
-		bookBO.addCopy(this.book);;
+		bookBO.addCopy(this.book);
 		Alert alert = new Alert(AlertType.INFORMATION);
 		alert.setTitle("Information Dialog");
 		alert.setHeaderText(null);

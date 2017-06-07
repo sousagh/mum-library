@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="267.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.mum.library.ui.controller.PeriodicController">
+   <children>
+      <Text layoutX="208.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Periodic Details">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Text>
+      <Text layoutX="57.0" layoutY="113.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name:" />
+      <Text layoutX="60.0" layoutY="143.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date:" />
+      <Button fx:id="checkoutButton" layoutX="41.0" layoutY="200.0" mnemonicParsing="false" onAction="#checkout" prefHeight="27.0" prefWidth="111.0" text="Checkout" />
+      <Label fx:id="namePeriodic" layoutX="127.0" layoutY="100.0" text="-" />
+      <Label fx:id="datePeriodic" layoutX="127.0" layoutY="130.0" text="-" />
+      <TextField fx:id="memberId" layoutX="183.0" layoutY="200.0" />
+      <Text layoutX="300.0" layoutY="143.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Available:" />
+      <Label fx:id="availability" layoutX="369.0" layoutY="130.0" text="-" />
+      <Text fx:id="memberLabel" layoutX="183.0" layoutY="196.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Member Id:" />
+   </children>
+</AnchorPane>
